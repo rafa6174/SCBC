@@ -1,24 +1,34 @@
 import tkinter as tk
 from tkinter import messagebox
-import csv
+import sqlite3
 
 # Función para manejar el inicio de sesión
 def login():
     usuario = user_entry.get()  # Obtiene el texto del campo de usuario
     contraseña = password_entry.get()  # Obtiene el texto del campo de contraseña
 
-    # Intentar abrir y leer el archivo CSV
-    try:
-        with open('usuarios.csv', mode='r') as archivo_csv:
-            lector_csv = csv.reader(archivo_csv)
-            for fila in lector_csv:
-                # Comparar usuario y contraseña con las filas del archivo CSV
-                if fila[0] == usuario and fila[1] == contraseña:
-                    messagebox.showinfo("Inicio de Sesión", "Inicio de sesión exitoso")
-                    return
-            messagebox.showerror("Error", "Usuario o contraseña incorrectos")
-    except FileNotFoundError:
-        messagebox.showerror("Error", "El archivo de usuarios no se encontró")
+    # Conectar a la base de datos
+    conn = sqlite3.connect('usuarios.db')
+    cursor = conn.cursor()
+
+    # Buscar el usuario y contraseña en la tabla 'usuarios'
+    cursor.execute('SELECT id FROM usuarios WHERE usuario=? AND contraseña=?', (usuario, contraseña))
+    resultado = cursor.fetchone()
+
+    if resultado:
+        user_id = resultado[0]
+
+        # Si el login es exitoso, buscar los datos personales en la tabla 'datos_personales'
+        cursor.execute('SELECT nombre, apellido, correo FROM datos_personales WHERE id=?', (user_id,))
+        datos = cursor.fetchone()
+
+        if datos:
+            nombre, apellido, correo = datos
+            messagebox.showinfo("Inicio de Sesión", f"Bienvenido {nombre} {apellido}\nCorreo: {correo}")
+    else:
+        messagebox.showerror("Error", "Usuario o contraseña incorrectos")
+
+    conn.close()
 
 # Crear la ventana principal
 root = tk.Tk()
@@ -29,7 +39,7 @@ label1 = tk.Label(root, text="Universidad Autónoma de Hidalgo", font=("Arial", 
 label2 = tk.Label(root, text="Tutorial Inteligente de Cálculo", font=("Arial", 14))
 label3 = tk.Label(root, text="Sistemas Basados en Conocimiento", font=("Arial", 14))
 label4 = tk.Label(root, text="Profesora: Martha Idalid Rivera González", font=("Arial", 12, "italic"))
-label5 = tk.Label(root, text="Alumnos: Loren Clavel Nolasco Hernández, Rafael Nieves Álvarez", font=("Arial", 12))
+label5 = tk.Label(root, text="Alumnos: Rafael Nieves Álvarez", font=("Arial", 12))
 
 # Empaquetar las etiquetas en la ventana
 label1.pack(pady=10)
@@ -39,7 +49,7 @@ label4.pack(pady=10)
 label5.pack(pady=5)
 
 # Crear una etiqueta para el Login
-login_label = tk.Label(root, text="Ingrese sus credenciales", font=("Arial", 14, "bold"))
+login_label = tk.Label(root, text="Login", font=("Arial", 14, "bold"))
 login_label.pack(pady=20)
 
 # Crear etiquetas y campos de entrada para usuario y contraseña
