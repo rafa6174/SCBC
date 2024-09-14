@@ -30,6 +30,77 @@ def login():
 
     conn.close()
 
+# Función para abrir la ventana de registro
+def abrir_formulario_registro():
+    # Crear una nueva ventana
+    ventana_registro = tk.Toplevel(root)
+    ventana_registro.title("Registro de Usuario")
+
+    # Etiquetas y campos de entrada para los datos de registro
+    tk.Label(ventana_registro, text="Nombre:", font=("Arial", 12)).pack(pady=5)
+    nombre_entry = tk.Entry(ventana_registro, font=("Arial", 12))
+    nombre_entry.pack()
+
+    tk.Label(ventana_registro, text="Apellido:", font=("Arial", 12)).pack(pady=5)
+    apellido_entry = tk.Entry(ventana_registro, font=("Arial", 12))
+    apellido_entry.pack()
+
+    tk.Label(ventana_registro, text="Correo Electrónico:", font=("Arial", 12)).pack(pady=5)
+    correo_entry = tk.Entry(ventana_registro, font=("Arial", 12))
+    correo_entry.pack()
+
+    tk.Label(ventana_registro, text="Usuario:", font=("Arial", 12)).pack(pady=5)
+    usuario_entry = tk.Entry(ventana_registro, font=("Arial", 12))
+    usuario_entry.pack()
+
+    tk.Label(ventana_registro, text="Contraseña:", font=("Arial", 12)).pack(pady=5)
+    contraseña_entry = tk.Entry(ventana_registro, font=("Arial", 12), show="*")
+    contraseña_entry.pack()
+
+    # Función para registrar al usuario en la base de datos
+    def registrar_usuario():
+        nombre = nombre_entry.get()
+        apellido = apellido_entry.get()
+        correo = correo_entry.get()
+        usuario = usuario_entry.get()
+        contraseña = contraseña_entry.get()
+
+        # Validar que no haya campos vacíos
+        if not (nombre and apellido and correo and usuario and contraseña):
+            messagebox.showerror("Error", "Todos los campos son obligatorios")
+            return
+
+        # Conectar a la base de datos
+        conn = sqlite3.connect('usuarios.db')
+        cursor = conn.cursor()
+
+        # Insertar el nuevo usuario en la tabla usuarios
+        try:
+            cursor.execute('''
+                INSERT INTO usuarios (usuario, contraseña)
+                VALUES (?, ?)
+            ''', (usuario, contraseña))
+
+            # Obtener el id del último usuario insertado
+            user_id = cursor.lastrowid
+
+            # Insertar los datos personales en la tabla datos_personales
+            cursor.execute('''
+                INSERT INTO datos_personales (id, nombre, apellido, correo)
+                VALUES (?, ?, ?, ?)
+            ''', (user_id, nombre, apellido, correo))
+
+            conn.commit()
+            messagebox.showinfo("Registro exitoso", "El usuario ha sido registrado con éxito")
+            ventana_registro.destroy()  # Cerrar la ventana de registro
+        except sqlite3.IntegrityError:
+            messagebox.showerror("Error", "El nombre de usuario ya existe")
+        finally:
+            conn.close()
+
+    # Botón para registrar al usuario
+    tk.Button(ventana_registro, text="Registrar", font=("Arial", 12), command=registrar_usuario).pack(pady=20)
+
 # Crear la ventana principal
 root = tk.Tk()
 root.title("Portada")
@@ -66,6 +137,10 @@ password_entry.pack(pady=5)
 # Crear un botón de inicio de sesión
 login_button = tk.Button(root, text="Iniciar Sesión", font=("Arial", 12), command=login)
 login_button.pack(pady=10)
+
+# Crear un botón para abrir el formulario de registro
+register_button = tk.Button(root, text="Registrar", font=("Arial", 12), command=abrir_formulario_registro)
+register_button.pack(pady=10)
 
 # Iniciar el loop principal
 root.mainloop()
