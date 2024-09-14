@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import sqlite3
+import examen_diagnostico
 
 # Función para manejar el inicio de sesión
 def login():
@@ -19,12 +20,19 @@ def login():
         user_id = resultado[0]
 
         # Si el login es exitoso, buscar los datos personales en la tabla 'datos_personales'
-        cursor.execute('SELECT nombre, apellido, correo FROM datos_personales WHERE id=?', (user_id,))
-        datos = cursor.fetchone()
+    cursor.execute('SELECT nombre, apellido, correo FROM datos_personales WHERE id=?', (user_id,))
+    datos = cursor.fetchone()
 
-        if datos:
-            nombre, apellido, correo = datos
-            messagebox.showinfo("Inicio de Sesión", f"Bienvenido {nombre} {apellido}\nCorreo: {correo}")
+    if datos:
+        nombre, apellido, correo = datos
+        messagebox.showinfo("Inicio de Sesión", f"Bienvenido {nombre} {apellido}\nCorreo: {correo}")
+
+        # Ocultar la ventana de login
+        root.withdraw()
+
+        # Llamar al nuevo formulario desde el otro archivo
+        examen_diagnostico.abrir_nuevo_formulario()
+
     else:
         messagebox.showerror("Error", "Usuario o contraseña incorrectos")
 
