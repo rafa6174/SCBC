@@ -4,7 +4,7 @@ from tkinter import ttk
 # Función para crear el formulario con las preguntas
 def abrir_nuevo_formulario():
     nueva_ventana = tk.Toplevel()
-    nueva_ventana.title("Formulario de Cálculo")
+    nueva_ventana.title("Examen diagnóstico")
 
     # Lista de preguntas y opciones por página
     preguntas = [
