@@ -1,3 +1,3 @@
 """Initialization for pydoku package"""
 
-from app.Portada import *
+from app.portada import *
