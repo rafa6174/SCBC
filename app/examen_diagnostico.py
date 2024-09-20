@@ -106,15 +106,25 @@ def abrir_nuevo_formulario():
             widget.destroy()
 
         # Calcular el puntaje
-        puntaje = 0
-        total_preguntas = 0
+        puntaje_dif = 0
+	puntaje_int = 0
+        preguntas_dif = 0
+	preguntas_int = 0
 
         for (pagina, pregunta), seleccion in respuestas.items():
             respuesta_correcta = respuestas_correctas[pagina][pregunta]
             respuesta_usuario = seleccion.get()
-            if respuesta_usuario == respuesta_correcta:
-                puntaje += 1
-            total_preguntas += 1
+	    if pagina > 1:
+            	if respuesta_usuario == respuesta_correcta:
+                	puntaje_int += 1
+            	preguntas_int += 1
+	    else:
+		if respuesta_usuario == respuesta_correcta:
+                	puntaje_dif += 1
+            	preguntas_dif += 1  
+
+	total_preguntas = preguntas_dif + preguntas_int
+	puntaje = puntaje_int + preguntas_dif
 
         # Mostrar puntaje
         tk.Label(nueva_ventana, text="Respuestas del Formulario", font=("Arial", 16, "bold")).pack(pady=10)
