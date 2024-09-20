@@ -98,37 +98,44 @@ def abrir_nuevo_formulario():
     def cambiar_pagina(nueva_pagina):
         # Guardar las respuestas de la página actual
         mostrar_pagina(nueva_pagina)
+	# Función para finalizar el formulario, calcular el puntaje y mostrar las respuestas
+	def finalizar_formulario():
+	    # Limpiar la ventana
+	    for widget in nueva_ventana.winfo_children():
+	        widget.destroy()
 
-    # Función para finalizar el formulario, calcular el puntaje y mostrar las respuestas
-    def finalizar_formulario():
-        # Limpiar la ventana
-        for widget in nueva_ventana.winfo_children():
-            widget.destroy()
+	    # Calcular el puntaje
+	    puntaje_dif = 0
+	    puntaje_int = 0
+	    preguntas_dif = 0
+	    preguntas_int = 0
 
-        # Calcular el puntaje
-        puntaje_dif = 0
-	puntaje_int = 0
-        preguntas_dif = 0
-	preguntas_int = 0
+	    for (pagina, pregunta), seleccion in respuestas.items():
+	        respuesta_correcta = respuestas_correctas[pagina][pregunta]
+	        respuesta_usuario = seleccion.get()
 
-        for (pagina, pregunta), seleccion in respuestas.items():
-            respuesta_correcta = respuestas_correctas[pagina][pregunta]
-            respuesta_usuario = seleccion.get()
-	    if pagina > 1:
-            	if respuesta_usuario == respuesta_correcta:
-                	puntaje_int += 1
-            	preguntas_int += 1
-	    else:
-		if respuesta_usuario == respuesta_correcta:
-                	puntaje_dif += 1
-            	preguntas_dif += 1  
+	        # Dividir las preguntas entre diferencial (páginas 0 y 1) e integral (página 2 en adelante)
+	        if pagina > 1:  # Páginas de integral (página 2 en adelante)
+	            if respuesta_usuario == respuesta_correcta:
+	                puntaje_int += 1
+	            preguntas_int += 1
+	        else:  # Páginas de diferencial (páginas 0 y 1)
+	            if respuesta_usuario == respuesta_correcta:
+	                puntaje_dif += 1
+	            preguntas_dif += 1
 
-	total_preguntas = preguntas_dif + preguntas_int
-	puntaje = puntaje_int + preguntas_dif
+	    total_preguntas = preguntas_dif + preguntas_int
+	    puntaje_total = puntaje_int + puntaje_dif  # Sumamos puntaje_dif y puntaje_int para obtener el total
 
-        # Mostrar puntaje
-        tk.Label(nueva_ventana, text="Respuestas del Formulario", font=("Arial", 16, "bold")).pack(pady=10)
-        tk.Label(nueva_ventana, text=f"Puntaje obtenido: {puntaje}/{total_preguntas}", font=("Arial", 14)).pack(pady=10)
+	    # Mostrar el puntaje
+	    tk.Label(nueva_ventana, text="Respuestas del Formulario", font=("Arial", 16, "bold")).pack(pady=10)
+	    tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/{preguntas_dif}", font=("Arial", 14)).pack(pady=10)
+	    tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/{preguntas_int}", font=("Arial", 14)).pack(pady=10)
+	    tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/{total_preguntas}", font=("Arial", 14)).pack(pady=10)
+
+	    # Botón para cerrar
+	    tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+
 
         # Mostrar cada respuesta con si fue correcta o incorrecta
         for (pagina, pregunta), seleccion in respuestas.items():
