@@ -17,40 +17,41 @@ def abrir_nuevo_formulario():
              ["Que es continua", "Que tiene una al menos una derivada en ese punto", "Que tiene una asíntota"]),
             ("Si una función es derivable, ¿es continua?",
              ["Sí", "No"]),
-            ("¿Cómo se calcula la integral definida?",
-             ["Usando el teorema fundamental del cálculo", "Derivando la función", "Multiplicando por una constante"])
+            ("¿Qué relación existe entre la derivada y la velocidad instantánea?",
+             ["La derivada es la velocidad instantánea", "La derivada es la aceleración", "No hay relación"])
         ],
         [
             ("¿Para qué sirve es la regla de la cadena?",
              ["Derivar productos", "Derivar Convoluciones", "Derivar composiciones"]),
             ("Si una función tiene derivada segunda positiva, ¿qué significa?",
              ["Concavidad hacia arriba", "Concavidad hacia abajo", "Es constante"]),
-            ("¿Qué es una integral indefinida?",
-             ["Una función", "Un número", "Una constante"]),
+            ("¿Qué significa que una función sea creciente?",
+             ["Que su derivada es positiva", "Que su derivada es negativa", "Que su derivada es cero"]),
             ("¿Qué teorema describe la relación entre la derivada y la pendiente de una tangente?",
              ["Teorema del valor intermedio", "Teorema del valor medio", "Teorema fundamental"]),
             ("¿Qué es un punto crítico?",
              ["Donde la derivada es cero", "Donde la función no es continua", "Donde la función es derivable"])
         ],
         [
-            ("¿Qué relación existe entre la derivada y la velocidad instantánea?",
-             ["La derivada es la velocidad instantánea", "La derivada es la aceleración", "No hay relación"]),
+            
             ("¿Cómo se representa gráficamente la integral definida?",
              ["El área bajo la curva", "La pendiente de la tangente", "El cambio de signo"]),
-            ("¿Qué significa que una función sea creciente?",
-             ["Que su derivada es positiva", "Que su derivada es negativa", "Que su derivada es cero"]),
+	        ("¿Qué es una integral indefinida?",
+             ["Una función", "Un número", "Una constante"]),
             ("¿Qué es una integral impropia?",
              ["Integral algo no acotado o sobre algo  no compacto", "Una integral mal calculada", "Una integral que no tiene solución"]),
             ("¿Cuál es el método de integración por partes?",
-             ["Dividir la integral en dos partes", "Usar una derivada dentro de la integral", "Usar un producto de funciones"])
+             ["Dividir la integral en dos partes", "Usar una derivada dentro de la integral", "Usar un producto de funciones"]),
+	        ("¿Cómo se calcula la integral definida?",
+             ["Usando el teorema fundamental del cálculo", "Derivando la función", "Multiplicando por una constante"])
         ]
     ]
 
     # Lista de respuestas correctas (mismo orden que las preguntas)
     respuestas_correctas = [
-        ["Teorema del valor intermedio", "Cero", "Que tiene una al menos una derivada en ese punto", "Sí", "Usando el teorema fundamental del cálculo"],
-        ["Derivar composiciones", "Concavidad hacia arriba", "Una función", "Teorema del valor medio", "Donde la derivada es cero"],
-        ["La derivada es la velocidad instantánea", "El área bajo la curva", "Que su derivada es positiva", "Integral algo no acotado o sobre algo  no compacto", "Usar un producto de funciones"]
+        ["Teorema del valor intermedio", "Cero", "Que tiene una al menos una derivada en ese punto", "Sí", "La derivada es la velocidad instantánea"],
+        ["Derivar composiciones", "Concavidad hacia arriba", "Que su derivada es positiva", "Teorema del valor medio", "Donde la derivada es cero"],
+        ["Usando el teorema fundamental del cálculo", "El área bajo la curva", "Una función", "Integral algo no acotado o sobre algo  no compacto", "Usar un producto de funciones"]
     ]
 
     # Crear una lista para almacenar las respuestas de cada página
