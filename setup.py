@@ -2,11 +2,11 @@
 
 from setuptools import setup
 
-setup(name='Pydoku',
+setup(name='SCBC',
       version='0.1',
-      description='A Python package to solve a sudoku',
-      url='https://github.com/Clavel11/Pydoku',
-      author='Brenda Escorcia, Clavel Nolasco',
-      author_email='es353611@uaeh.edu.mx, no420760@uaeh.edu.mx',
-      packages=['pydoku'],
+      description='STI Cálculo diferencial',
+      url='https://github.com/Clavel11/SCBC',
+      author='BRafael Nieves, Clavel Nolasco',
+      author_email='ni353253@uaeh.edu.mx, no420760@uaeh.edu.mx',
+      packages=['app'],
       zip_safe=False)
