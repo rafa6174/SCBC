@@ -115,10 +115,10 @@ root.title("Portada")
 
 # Crear etiquetas con el texto deseado
 label1 = tk.Label(root, text="Universidad Autónoma de Hidalgo", font=("Arial", 16, "bold"))
-label2 = tk.Label(root, text="Tutorial Inteligente de Cálculo", font=("Arial", 14))
+label2 = tk.Label(root, text="Tutorial Inteligente de Cálculo Diferencial", font=("Arial", 14))
 label3 = tk.Label(root, text="Sistemas Basados en Conocimiento", font=("Arial", 14))
 label4 = tk.Label(root, text="Profesora: Martha Idalid Rivera González", font=("Arial", 12, "italic"))
-label5 = tk.Label(root, text="Alumnos: Rafael Nieves Álvarez", font=("Arial", 12))
+label5 = tk.Label(root, text="Alumnos: Rafael Nieves Álvarez, Loren Clavel Nolasco Hernández", font=("Arial", 12))
 
 # Empaquetar las etiquetas en la ventana
 label1.pack(pady=10)
