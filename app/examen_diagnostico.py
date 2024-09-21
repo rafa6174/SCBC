@@ -133,7 +133,7 @@ def abrir_nuevo_formulario():
 		puntajeint=puntaje_int/preguntas_int
 		puntajetotal=puntaje_total/total_preguntas
 		class ExamenDiagnostico(Fact):
-    		pass
+			pass
 
 		class SistemaExperto1(KnowledgeEngine):
     			@Rule(ExamenDiagnostico(puntaje1=P(lambda x: x < 0.5)))
