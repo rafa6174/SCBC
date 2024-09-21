@@ -128,52 +128,54 @@ def abrir_nuevo_formulario():
 		total_preguntas = preguntas_dif + preguntas_int
 		puntaje_total = puntaje_int + puntaje_dif  # Sumamos puntaje_dif y puntaje_int para obtener el total
 
-		#Sistema experto que determina el curso que se debe tomar
-		puntajedif=puntaje_dif/preguntas_dif
-		puntajeint=puntaje_int/preguntas_int
-		puntajetotal=puntaje_total/total_preguntas
+		# Sistema experto que determina el curso que se debe tomar
+		puntajedif = puntaje_dif / preguntas_dif
+		puntajeint = puntaje_int / preguntas_int
+		puntajetotal = puntaje_total / total_preguntas
+
 		class ExamenDiagnostico(Fact):
-			pass
+    			pass
 
 		class SistemaExperto1(KnowledgeEngine):
     			@Rule(ExamenDiagnostico(puntaje1=P(lambda x: x < 0.5)))
     			def necesita_curso(self):
-				tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo.", font=("Arial", 16, "bold")).pack(pady=10)
 
     			@Rule(ExamenDiagnostico(puntaje1=P(lambda x: x >= 0.5)))
     			def no_necesita_curso(self):
-				tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo.", font=("Arial", 16, "bold")).pack(pady=10)
 
 		class SistemaExperto2(KnowledgeEngine):
     			@Rule(ExamenDiagnostico(puntaje2=P(lambda x: x < 0.5)))
     			def necesita_curso(self):
-				tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo diferencial.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo diferencial.", font=("Arial", 16, "bold")).pack(pady=10)
 
     			@Rule(ExamenDiagnostico(puntaje2=P(lambda x: x >= 0.5)))
     			def no_necesita_curso(self):
-				tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo diferencial.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo diferencial.", font=("Arial", 16, "bold")).pack(pady=10)
 
 		class SistemaExperto3(KnowledgeEngine):
     			@Rule(ExamenDiagnostico(puntaje3=P(lambda x: x < 0.5)))
     			def necesita_curso(self):
-				tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo integral.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo integral.", font=("Arial", 16, "bold")).pack(pady=10)
 
     			@Rule(ExamenDiagnostico(puntaje3=P(lambda x: x >= 0.5)))
     			def no_necesita_curso(self):
-				tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo integral.", font=("Arial", 16, "bold")).pack(pady=10)
-		#Para sistema experto 1
+        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo integral.", font=("Arial", 16, "bold")).pack(pady=10)
+
+		# Para sistema experto 1
 		engine = SistemaExperto1()
 		engine.reset()
 		engine.declare(ExamenDiagnostico(puntaje1=puntajetotal))
 		engine.run()
 
-		#Para sistema experto 2
+		# Para sistema experto 2
 		engine = SistemaExperto2()
 		engine.reset()
 		engine.declare(ExamenDiagnostico(puntaje2=puntajedif))
 		engine.run()
 
-		#Para sistema experto 3
+		# Para sistema experto 3
 		engine = SistemaExperto3()
 		engine.reset()
 		engine.declare(ExamenDiagnostico(puntaje3=puntajeint))
