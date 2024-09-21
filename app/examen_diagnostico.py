@@ -51,7 +51,7 @@ def abrir_nuevo_formulario():
 	respuestas_correctas = [
 		["Teorema del valor intermedio", "Cero", "Que tiene una al menos una derivada en ese punto", "Sí", "La derivada es la velocidad instantánea"],
 		["Derivar composiciones", "Concavidad hacia arriba", "Que su derivada es positiva", "Teorema del valor medio", "Donde la derivada es cero"],
-		["Usando el teorema fundamental del cálculo", "El área bajo la curva", "Una función", "Integral algo no acotado o sobre algo  no compacto", "Usar un producto de funciones"]
+		["El área bajo la curva", "Una función", "Integral algo no acotado o sobre algo  no compacto", "Usar un producto de funciones", "Usando el teorema fundamental del cálculo"]
 	]
 
 	# Crear una lista para almacenar las respuestas de cada página
@@ -128,6 +128,13 @@ def abrir_nuevo_formulario():
 		total_preguntas = preguntas_dif + preguntas_int
 		puntaje_total = puntaje_int + puntaje_dif  # Sumamos puntaje_dif y puntaje_int para obtener el total
 
+		# A partir de aquí se mostrarán los resultados
+		tk.Label(nueva_ventana, text="Resultados del examen diagnóstico", font=("Arial", 16, "bold")).pack(pady=10)
+		tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/{preguntas_dif}", font=("Arial", 14)).pack(pady=10)
+		tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/{preguntas_int}", font=("Arial", 14)).pack(pady=10)
+		tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/{total_preguntas}", font=("Arial", 14)).pack(pady=10)
+		tk.Label(nueva_ventana, text="Resultados del curso a tomar", font=("Arial", 16, "bold")).pack(pady=10)
+
 		# Sistema experto que determina el curso que se debe tomar
 		puntajedif = puntaje_dif / preguntas_dif
 		puntajeint = puntaje_int / preguntas_int
@@ -139,29 +146,29 @@ def abrir_nuevo_formulario():
 		class SistemaExperto1(KnowledgeEngine):
     			@Rule(ExamenDiagnostico(puntaje1=P(lambda x: x < 0.5)))
     			def necesita_curso(self):
-        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo.", font=("Arial", 14, "italic")).pack(pady=10)
 
     			@Rule(ExamenDiagnostico(puntaje1=P(lambda x: x >= 0.5)))
     			def no_necesita_curso(self):
-        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo.", font=("Arial", 14, "italic")).pack(pady=10)
 
 		class SistemaExperto2(KnowledgeEngine):
     			@Rule(ExamenDiagnostico(puntaje2=P(lambda x: x < 0.5)))
     			def necesita_curso(self):
-        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo diferencial.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo diferencial.", font=("Arial", 14, "italic")).pack(pady=10)
 
     			@Rule(ExamenDiagnostico(puntaje2=P(lambda x: x >= 0.5)))
     			def no_necesita_curso(self):
-        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo diferencial.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo diferencial.", font=("Arial", 14, "italic")).pack(pady=10)
 
 		class SistemaExperto3(KnowledgeEngine):
     			@Rule(ExamenDiagnostico(puntaje3=P(lambda x: x < 0.5)))
     			def necesita_curso(self):
-        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo integral.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo integral.", font=("Arial", 14, "italic")).pack(pady=10)
 
     			@Rule(ExamenDiagnostico(puntaje3=P(lambda x: x >= 0.5)))
     			def no_necesita_curso(self):
-        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo integral.", font=("Arial", 16, "bold")).pack(pady=10)
+        			tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo integral.", font=("Arial", 14, "italic")).pack(pady=10)
 
 		# Para sistema experto 1
 		engine = SistemaExperto1()
@@ -180,12 +187,6 @@ def abrir_nuevo_formulario():
 		engine.reset()
 		engine.declare(ExamenDiagnostico(puntaje3=puntajeint))
 		engine.run()
-
-		# Mostrar el puntaje
-		tk.Label(nueva_ventana, text="Respuestas del Formulario", font=("Arial", 16, "bold")).pack(pady=10)
-		tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/{preguntas_dif}", font=("Arial", 14)).pack(pady=10)
-		tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/{preguntas_int}", font=("Arial", 14)).pack(pady=10)
-		tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/{total_preguntas}", font=("Arial", 14)).pack(pady=10)
 		
 		# Botón para cerrar
 		tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
