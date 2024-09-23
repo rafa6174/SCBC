@@ -39,7 +39,7 @@ def abrir_nuevo_formulario():
 			("¿Qué es una integral indefinida?",
 				["Una función", "Un número", "Una constante"]),
 			("¿Qué es una integral impropia?",
-				["Integral algo no acotado o sobre algo  no compacto", "Una integral mal calculada", "Una integral que no tiene solución"]),
+				["Integrar algo no acotado o sobre algo  no compacto", "Una integral mal calculada", "Una integral que no tiene solución"]),
 			("¿Cuál es el método de integración por partes?",
 				["Dividir la integral en dos partes", "Usar una derivada dentro de la integral", "Usar un producto de funciones"]),
 			("¿Cómo se calcula la integral definida?",
@@ -51,7 +51,7 @@ def abrir_nuevo_formulario():
 	respuestas_correctas = [
 		["Teorema del valor intermedio", "Cero", "Que tiene una al menos una derivada en ese punto", "Sí", "La derivada es la velocidad instantánea"],
 		["Derivar composiciones", "Concavidad hacia arriba", "Que su derivada es positiva", "Teorema del valor medio", "Donde la derivada es cero"],
-		["El área bajo la curva", "Una función", "Integral algo no acotado o sobre algo  no compacto", "Usar un producto de funciones", "Usando el teorema fundamental del cálculo"]
+		["El área bajo la curva", "Una función", "Integrar algo no acotado o sobre algo  no compacto", "Usar un producto de funciones", "Usando el teorema fundamental del cálculo"]
 	]
 
 	# Crear una lista para almacenar las respuestas de cada página
@@ -78,8 +78,8 @@ def abrir_nuevo_formulario():
 			for opcion in opciones:
 				tk.Radiobutton(nueva_ventana, text=opcion, variable=seleccion, value=opcion, font=("Arial", 12)).pack(anchor=tk.W)
 
-			# Guardar la respuesta seleccionada
-			respuestas[(pagina, i)] = seleccion
+			seleccion.trace("w", lambda *args, p=pagina, q=i, v=seleccion: respuestas.update({(p, q): v.get()}))
+
 
 		# Botones de navegación
 		btn_frame = tk.Frame(nueva_ventana)
@@ -95,7 +95,7 @@ def abrir_nuevo_formulario():
 
 	# Función para cambiar la página
 	def cambiar_pagina(nueva_pagina):
-		# Guardar las respuestas de la página actual
+
 		mostrar_pagina(nueva_pagina)
 
 	# Función para finalizar el formulario, calcular el puntaje y mostrar las respuestas
@@ -112,7 +112,7 @@ def abrir_nuevo_formulario():
 
 		for (pagina, pregunta), seleccion in respuestas.items():
 			respuesta_correcta = respuestas_correctas[pagina][pregunta]
-			respuesta_usuario = seleccion.get()
+			respuesta_usuario = seleccion
 
 			# Dividir las preguntas entre diferencial (páginas 0 y 1) e integral (página 2 en adelante)
 			if pagina > 1:  # Páginas de integral (página 2 en adelante)
@@ -241,7 +241,7 @@ def abrir_nuevo_formulario():
 		engine.reset()
 		engine.declare(ExamenDiagnostico(puntaje3=puntajeint))
 		engine.run()
-		
+
 		# Botón para cerrar
 		tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
 
