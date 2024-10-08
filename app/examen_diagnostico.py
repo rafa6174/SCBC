@@ -67,8 +67,6 @@ def abrir_nuevo_formulario():
                         widget.destroy()
 
                 # Mostrar las preguntas de la página correspondiente
-                tk.Label(nueva_ventana, text=f"Página {pagina + 1}", font=("Arial", 16, "bold")).pack(pady=10)
-
                 for i, (pregunta, opciones) in enumerate(preguntas[pagina]):
                         tk.Label(nueva_ventana, text=pregunta, font=("Arial", 12)).pack(pady=5)
 
@@ -79,7 +77,6 @@ def abrir_nuevo_formulario():
                                 tk.Radiobutton(nueva_ventana, text=opcion, variable=seleccion, value=opcion, font=("Arial", 12)).pack(anchor=tk.W)
 
                         seleccion.trace("w", lambda *args, p=pagina, q=i, v=seleccion: respuestas.update({(p, q): v.get()}))
-
 
                 # Botones de navegación
                 btn_frame = tk.Frame(nueva_ventana)
@@ -92,6 +89,9 @@ def abrir_nuevo_formulario():
                         tk.Button(btn_frame, text="Siguiente", font=("Arial", 12), command=lambda: cambiar_pagina(pagina + 1)).pack(side=tk.RIGHT, padx=10)
                 else:
                         tk.Button(btn_frame, text="Finalizar", font=("Arial", 12), command=finalizar_formulario).pack(side=tk.RIGHT, padx=10)
+
+                # Mostrar el número de página en la esquina inferior derecha
+                tk.Label(nueva_ventana, text=f"Página {pagina + 1}", font=("Arial", 10)).place(relx=0.95, rely=0.95, anchor=tk.SE)
 
         # Función para cambiar la página
         def cambiar_pagina(nueva_pagina):
