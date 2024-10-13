@@ -11,16 +11,16 @@ def abrir_pdf(ruta_pdf):
 
 # Función para practicar cálculo diferencial
 def practicar_diferencial():
-        ejercicios_fallidos = []
-        realizar_ejercicio_diferencial(ejercicios_fallidos)
+        nueva_ventana=tk.Toplevel()
+        realizar_ejercicio_diferencial(nueva_ventana)
 
 # Función para practicar cálculo integral
 def practicar_integral():
-        ejercicios_fallidos = []
-        realizar_ejercicio_integral(ejercicios_fallidos)
+        nueva_ventana=tk.Toplevel()
+        realizar_ejercicio_integral(nueva_ventana)
 
 # Función para realizar los ejercicios de cálculo diferencial
-def realizar_ejercicio_diferencial():
+def realizar_ejercicio_diferencial(nueva_ventana):
         import grafpol  # Ejercicio de gráficas
         grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
 
@@ -31,11 +31,11 @@ def realizar_ejercicio_diferencial():
         derac.mostrar_ejercicio_derivada_sqrt(nueva_ventana)  # Asume que derac tiene la función mostrar_ejercicio
 
         import derexp  # Ejercicio de derivadas de exponenciales
-        derexp.ostrar_ejercicio_derivada_exp(nueva_ventana)# Asume que derexp tiene la función mostrar_ejercicio
+        derexp.mostrar_ejercicio_derivada_exp(nueva_ventana)# Asume que derexp tiene la función mostrar_ejercicio
 
 
 # Función para realizar los ejercicios de cálculo integral
-def realizar_ejercicio_integral():
+def realizar_ejercicio_integral(nueva_ventana):
         import grafpol  # Ejercicio de gráficas
         grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
 
@@ -52,10 +52,9 @@ def realizar_ejercicio_integral():
 # Función para crear los botones de prácticas y notas
 def mostrar_botones_practica(nueva_ventana):
         # Botón para practicar cálculo diferencial
-        tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=practicar_diferencial).pack(pady=10)
+        tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=lambda: practicar_diferencial()).pack(pady=10)
 
-        # Botón para practicar cálculo integral
-        tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=practicar_integral).pack(pady=10)
+        tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=lambda: practicar_integral()).pack(pady=10)
 
         # Botón para ver notas de cálculo diferencial
         tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
