@@ -81,6 +81,8 @@ def mostrar_ejercicio_grafica(ventana):
     # Iniciar el loop de la ventana
     ventana.mainloop()
 
+
+
 # Ejecutar el ejercicio
 if __name__ == "__main__":
     # Crear una ventana de Tkinter
