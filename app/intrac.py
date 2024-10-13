@@ -11,13 +11,12 @@ x = sp.Symbol('x')
 def generar_ejercicio_integral_sqrt():
     a = random.randint(1, 5)
     b = random.randint(1, 5)
-    c = random.randint(1, 5)
-    funcion = sp.sqrt(a * x**2 + b * x + c)
+    funcion = sp.sqrt(a * x + b )
     integral_correcta = sp.integrate(funcion, x)
 
     # Opciones incorrectas
-    incorrecto_1 = sp.sqrt(a * x**2 + (b + 1) * x + c)
-    incorrecto_2 = sp.sqrt(a * x**2 + b * x + (c + 1))
+    incorrecto_1 = sp.sqrt(a * x + (b + 1) )
+    incorrecto_2 = sp.sqrt((a+1) * x + b+ 2)
 
     opciones = [integral_correcta, incorrecto_1, incorrecto_2]
     random.shuffle(opciones)  # Mezclamos las opciones
@@ -34,13 +33,14 @@ def renderizar_latex_en_tkinter(expresion, ventana, fontsize=12):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
+# Crear la ventana de Tkinter
+ventana = tk.Tk()
+ventana.title("Ejercicio de Integral de sqrt(ax + b)")
+
 # Función para crear la ventana del ejercicio de integral
-def mostrar_ejercicio_integral_sqrt():
+def mostrar_ejercicio_integral_sqrt(ventana):
     funcion, integral_correcta, opciones = generar_ejercicio_integral_sqrt()
 
-    # Crear la ventana de Tkinter
-    ventana = tk.Tk()
-    ventana.title("Ejercicio de Integral de sqrt(ax^2 + bx + c)")
 
     # Instrucciones
     label_instruccion = tk.Label(ventana, text="¿Cuál es la integral de la siguiente función?", font=("Arial", 14))
@@ -77,4 +77,4 @@ def mostrar_ejercicio_integral_sqrt():
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
-    mostrar_ejercicio_integral_sqrt()
+    mostrar_ejercicio_integral_sqrt(ventana)

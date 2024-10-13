@@ -33,13 +33,13 @@ def renderizar_latex_en_tkinter(expresion, ventana, fontsize=12):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-# Función para crear la ventana del ejercicio de integral
-def mostrar_ejercicio_integral_exp():
-    funcion, integral_correcta, opciones = generar_ejercicio_integral_exp()
+# Crear la ventana de Tkinter
+ventana = tk.Tk()
+ventana.title("Ejercicio de Integral de Función Exponencial")
 
-    # Crear la ventana de Tkinter
-    ventana = tk.Tk()
-    ventana.title("Ejercicio de Integral de Función Exponencial")
+# Función para crear la ventana del ejercicio de integral
+def mostrar_ejercicio_integral_exp(ventana):
+    funcion, integral_correcta, opciones = generar_ejercicio_integral_exp()
 
     # Instrucciones
     label_instruccion = tk.Label(ventana, text="¿Cuál es la integral de la siguiente función?", font=("Arial", 14))
@@ -75,5 +75,5 @@ def mostrar_ejercicio_integral_exp():
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
-    mostrar_ejercicio_integral_exp()
+    mostrar_ejercicio_integral_exp(ventana)
 

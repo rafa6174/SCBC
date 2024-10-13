@@ -23,17 +23,14 @@ def generar_ejercicio_integral():
     return polinomio, integral_correcta, opciones
 
 # Función para renderizar ecuaciones LaTeX en una imagen con matplotlib
-def mostrar_latex_en_tkinter(expr, ventana, pos_y=0):
-    fig, ax = plt.subplots(figsize=(5, 1))
-    ax.text(0.5, 0.5, f"${sp.latex(expr)}$", fontsize=20, ha='center', va='center')
+def renderizar_latex_en_tkinter(expresion, ventana, fontsize=12):
+    fig, ax = plt.subplots(figsize=(3, 0.5))  # Ajustar el tamaño del área de la figura
+    ax.text(0.5, 0.5, f"${sp.latex(expresion)}$", fontsize=fontsize, ha='center', va='center')
     ax.axis('off')
 
-    # Mostrar el gráfico en la ventana de Tkinter
     canvas = FigureCanvasTkAgg(fig, master=ventana)
     canvas.draw()
-    canvas.get_tk_widget().pack(pady=pos_y)
-
-    return canvas
+    canvas.get_tk_widget().pack()
 
 # Crear una ventana
 ventana = tk.Tk()
@@ -48,7 +45,7 @@ def mostrar_ejercicio(ventana):
     pregunta_label = tk.Label(ventana, text="¿Cuál es la integral de?", font=("Arial", 14))
     pregunta_label.pack(pady=10)
 
-    mostrar_latex_en_tkinter(polinomio, ventana, pos_y=10)
+    renderizar_latex_en_tkinter(polinomio, ventana, 14)
 
     # Variable para almacenar la opción seleccionada
     seleccion = tk.StringVar()
@@ -59,7 +56,7 @@ def mostrar_ejercicio(ventana):
     for i, opcion in enumerate(opciones):
         label = tk.Label(ventana, text=f"Opción {i+1}:", font=("Arial", 12))
         label.pack(pady=5)
-        widgets_opciones.append(mostrar_latex_en_tkinter(opcion, ventana, pos_y=5))
+        widgets_opciones.append(renderizar_latex_en_tkinter(opcion, ventana, 12))
 
         radio_btn = tk.Radiobutton(ventana, variable=seleccion, value=str(opcion))
         radio_btn.pack()

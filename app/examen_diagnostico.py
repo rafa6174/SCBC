@@ -7,45 +7,53 @@ import subprocess
 
 # Función para abrir archivos PDF
 def abrir_pdf(ruta_pdf):
-    subprocess.Popen(['xdg-open', ruta_pdf])
+        subprocess.Popen(['xdg-open', ruta_pdf])
 
 # Función para practicar cálculo diferencial
 def practicar_diferencial():
-    ejercicios_fallidos = []
-    realizar_ejercicio_diferencial(ejercicios_fallidos)
+        ejercicios_fallidos = []
+        realizar_ejercicio_diferencial(ejercicios_fallidos)
 
 # Función para practicar cálculo integral
 def practicar_integral():
-    ejercicios_fallidos = []
-    realizar_ejercicio_integral(ejercicios_fallidos)
+        ejercicios_fallidos = []
+        realizar_ejercicio_integral(ejercicios_fallidos)
 
 # Función para realizar los ejercicios de cálculo diferencial
-def realizar_ejercicio_diferencial(ejercicios_fallidos):
-    # Aquí deberías agregar lógica para mostrar ejercicios de gráficas, polinomios, raíces y exponenciales
-    # y verificar si la respuesta fue correcta o no. Los incorrectos deben guardarse en 'ejercicios_fallidos'
-    pass
+def realizar_ejercicio_diferencial():
+    import grafpol  # Ejercicio de gráficas
+    grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
+
+    import cursodif  # Ejercicio de derivadas de polinomios
+    cursodif.mostrar_ejercicio(nueva_ventana)  # Asume que cursodif tiene la función mostrar_ejercicio
+
+    import derac  # Ejercicio de derivadas de raíces
+    derac.mostrar_ejercicio(nueva_ventana)  # Asume que derac tiene la función mostrar_ejercicio
+
+    import derexp  # Ejercicio de derivadas de exponenciales
+    derexp.mostrar_ejercicio(nueva_ventana)  # Asume que derexp tiene la función mostrar_ejercicio
+
 
 # Función para realizar los ejercicios de cálculo integral
 def realizar_ejercicio_integral(ejercicios_fallidos):
-    # Similar a la función para diferencial, pero con ejercicios de integrales
-    pass
+# Similar a la función para diferencial, pero con ejercicios de integrales
+        pass
 
 # Función para crear los botones de prácticas y notas
 def mostrar_botones_practica(nueva_ventana):
-    # Botón para practicar cálculo diferencial
-    tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=practicar_diferencial).pack(pady=10)
+        # Botón para practicar cálculo diferencial
+        tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=practicar_diferencial).pack(pady=10)
 
-    # Botón para practicar cálculo integral
-    tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=practicar_integral).pack(pady=10)
+        # Botón para practicar cálculo integral
+        tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=practicar_integral).pack(pady=10)
 
-    # Botón para ver notas de cálculo diferencial
-    tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
-              command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
+        # Botón para ver notas de cálculo diferencial
+        tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
+                command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
 
-    # Botón para ver notas de cálculo integral
-    tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
-              command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
-
+        # Botón para ver notas de cálculo integral
+        tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
+                command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
 
 # Función para crear el formulario con las preguntas
 def abrir_nuevo_formulario():
@@ -233,6 +241,7 @@ def abrir_nuevo_formulario():
                 engine.declare(ExamenDiagnostico(puntaje3=puntajeint))
                 engine.run()
 
+                mostrar_botones_practica(nueva_ventana)
                 # Botón para cerrar
                 tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
 

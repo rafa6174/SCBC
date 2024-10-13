@@ -33,13 +33,14 @@ def renderizar_latex_en_tkinter(expresion, ventana, fontsize=12):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
+# Crear la ventana de Tkinter
+ventana = tk.Tk()
+ventana.title("Ejercicio de Derivada de sqrt(ax^2 + bx + c)")
+
 # Función para crear la ventana del ejercicio de derivada
-def mostrar_ejercicio_derivada_sqrt():
+def mostrar_ejercicio_derivada_sqrt(ventana):
     funcion, derivada_correcta, opciones = generar_ejercicio_derivada_sqrt()
 
-    # Crear la ventana de Tkinter
-    ventana = tk.Tk()
-    ventana.title("Ejercicio de Derivada de sqrt(ax^2 + bx + c)")
 
     # Instrucciones
     label_instruccion = tk.Label(ventana, text="¿Cuál es la derivada de la siguiente función?", font=("Arial", 14))
@@ -76,4 +77,4 @@ def mostrar_ejercicio_derivada_sqrt():
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
-    mostrar_ejercicio_derivada_sqrt()
+    mostrar_ejercicio_derivada_sqrt(ventana)
