@@ -1,60 +1,96 @@
+import tkinter as tk
+from tkinter import ttk
 from experta import *
-import tkinter as tk
-from tkinter import ttk
-import tkinter as tk
-from tkinter import ttk
 import subprocess
+import os
+import platform
+
+# Importar los módulos personalizados
+import grafpol
+import cursodif
+import derac
+import derexp
+import cursoint
+import intrac
+import intexp
+
 
 # Función para abrir archivos PDF
 def abrir_pdf(ruta_pdf):
-        subprocess.Popen(['xdg-open', ruta_pdf])
+    if platform.system() == "Windows":
+        os.startfile(ruta_pdf)  # Abre el archivo en Windows
+    elif platform.system() == "Darwin":  # macOS
+        subprocess.Popen(["open", ruta_pdf])
+    else:  # Linux
+        subprocess.Popen(["xdg-open", ruta_pdf])
 
+ejercicios_fallidos=[]
 # Función para practicar cálculo diferencial
-def practicar_diferencial():
+def practicar_diferencial(ejercicios_fallidos):
         nueva_ventana=tk.Toplevel()
         realizar_ejercicio_diferencial(nueva_ventana)
 
 # Función para practicar cálculo integral
-def practicar_integral():
+def practicar_integral(ejercicios_fallidos):
         nueva_ventana=tk.Toplevel()
         realizar_ejercicio_integral(nueva_ventana)
 
 # Función para realizar los ejercicios de cálculo diferencial
+# Función para realizar los ejercicios de cálculo diferencial
 def realizar_ejercicio_diferencial(nueva_ventana):
-        import grafpol  # Ejercicio de gráficas
-        grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
+        ejercicios = [
+                grafpol.mostrar_ejercicio_grafica,
+                cursodif.crear_ejercicio,
+                derac.mostrar_ejercicio_derivada_sqrt,
+                derexp.mostrar_ejercicio_derivada_exp
+        ]
 
-        import cursodif  # Ejercicio de derivadas de polinomios
-        cursodif.crear_ejercicio(nueva_ventana)  # Asume que cursodif tiene la función mostrar_ejercicio
+    # Función interna para manejar el flujo de los ejercicios
+        def ejecutar_ejercicio(indice):
+                if indice < len(ejercicios):
+                        ejercicios[indice](nueva_ventana)
+                # Botón para avanzar al siguiente ejercicio
+                        siguiente_btn = tk.Button(nueva_ventana, text="Siguiente ejercicio",
+                                                command=lambda: ejecutar_ejercicio(indice + 1))
+                        siguiente_btn.pack(pady=10)
+                else:
+                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
 
-        import derac  # Ejercicio de derivadas de raíces
-        derac.mostrar_ejercicio_derivada_sqrt(nueva_ventana)  # Asume que derac tiene la función mostrar_ejercicio
-
-        import derexp  # Ejercicio de derivadas de exponenciales
-        derexp.mostrar_ejercicio_derivada_exp(nueva_ventana)# Asume que derexp tiene la función mostrar_ejercicio
+        # Comenzar con el primer ejercicio
+        ejecutar_ejercicio(0)
 
 
 # Función para realizar los ejercicios de cálculo integral
+# Función para realizar los ejercicios de cálculo integral
 def realizar_ejercicio_integral(nueva_ventana):
-        import grafpol  # Ejercicio de gráficas
-        grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
+        ejercicios = [
+                grafpol.mostrar_ejercicio_grafica,
+                cursoint.mostrar_ejercicio,
+                intrac.mostrar_ejercicio_integral_sqrt,
+                intexp.mostrar_ejercicio_integral_exp
+        ]
 
-        import cursoint  # Ejercicio de integrales de polinomios
-        cursoint.mostrar_ejercicio(nueva_ventana)  # Asume que cursoint tiene la función mostrar_ejercicio
+        # Función interna para manejar el flujo de los ejercicios
+        def ejecutar_ejercicio(indice):
+                if indice < len(ejercicios):
+                        ejercicios[indice](nueva_ventana)
+                        # Botón para avanzar al siguiente ejercicio
+                        siguiente_btn = tk.Button(nueva_ventana, text="Siguiente ejercicio",
+                                                command=lambda: ejecutar_ejercicio(indice + 1))
+                        siguiente_btn.pack(pady=10)
+                else:
+                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo integral!").pack(pady=10)
 
-        import intrac  # Ejercicio de integrales de raíces
-        intrac. mostrar_ejercicio_integral_sqrt(nueva_ventana)  # Asume que intrac tiene la función mostrar_ejercicio
-
-        import intexp  # Ejercicio de integrales de exponenciales
-        intexp.mostrar_ejercicio_integral_exp(nueva_ventana)# Asume que intexp tiene la función mostrar_ejercicio
+        # Comenzar con el primer ejercicio
+        ejecutar_ejercicio(0)
 
 
 # Función para crear los botones de prácticas y notas
 def mostrar_botones_practica(nueva_ventana):
         # Botón para practicar cálculo diferencial
-        tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=lambda: practicar_diferencial()).pack(pady=10)
+        tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=lambda: practicar_diferencial(ejercicios_fallidos)).pack(pady=10)
 
-        tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=lambda: practicar_integral()).pack(pady=10)
+        tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=lambda: practicar_integral(ejercicios_fallidos)).pack(pady=10)
 
         # Botón para ver notas de cálculo diferencial
         tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
