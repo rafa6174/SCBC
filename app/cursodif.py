@@ -27,7 +27,7 @@ def generar_opciones(polinomio):
 def mostrar_latex_lienzo(ventana, expresion, pos_y):
     # Crear una figura para matplotlib
     fig, ax = plt.subplots(figsize=(5, 1))  # Tamaño pequeño
-    ax.text(0.5, 0.5, f"${sp.latex(expresion)}$", fontsize=18, ha='center', va='center')
+    ax.text(0.5, 0.5, f"${sp.latex(expresion)}$", fontsize=14, ha='center', va='center')
     ax.axis('off')  # Ocultar ejes
 
     # Integrar la figura en la ventana Tkinter

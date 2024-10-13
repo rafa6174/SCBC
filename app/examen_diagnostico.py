@@ -21,23 +21,33 @@ def practicar_integral():
 
 # Función para realizar los ejercicios de cálculo diferencial
 def realizar_ejercicio_diferencial():
-    import grafpol  # Ejercicio de gráficas
-    grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
+        import grafpol  # Ejercicio de gráficas
+        grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
 
-    import cursodif  # Ejercicio de derivadas de polinomios
-    cursodif.mostrar_ejercicio(nueva_ventana)  # Asume que cursodif tiene la función mostrar_ejercicio
+        import cursodif  # Ejercicio de derivadas de polinomios
+        cursodif.crear_ejercicio(nueva_ventana)  # Asume que cursodif tiene la función mostrar_ejercicio
 
-    import derac  # Ejercicio de derivadas de raíces
-    derac.mostrar_ejercicio(nueva_ventana)  # Asume que derac tiene la función mostrar_ejercicio
+        import derac  # Ejercicio de derivadas de raíces
+        derac.mostrar_ejercicio_derivada_sqrt(nueva_ventana)  # Asume que derac tiene la función mostrar_ejercicio
 
-    import derexp  # Ejercicio de derivadas de exponenciales
-    derexp.mostrar_ejercicio(nueva_ventana)  # Asume que derexp tiene la función mostrar_ejercicio
+        import derexp  # Ejercicio de derivadas de exponenciales
+        derexp.ostrar_ejercicio_derivada_exp(nueva_ventana)# Asume que derexp tiene la función mostrar_ejercicio
 
 
 # Función para realizar los ejercicios de cálculo integral
-def realizar_ejercicio_integral(ejercicios_fallidos):
-# Similar a la función para diferencial, pero con ejercicios de integrales
-        pass
+def realizar_ejercicio_integral():
+        import grafpol  # Ejercicio de gráficas
+        grafpol.mostrar_ejercicio_grafica(nueva_ventana)  # Asume que grafpol tiene la función mostrar_ejercicio_grafica
+
+        import cursoint  # Ejercicio de integrales de polinomios
+        cursoint.mostrar_ejercicio(nueva_ventana)  # Asume que cursoint tiene la función mostrar_ejercicio
+
+        import intrac  # Ejercicio de integrales de raíces
+        intrac. mostrar_ejercicio_integral_sqrt(nueva_ventana)  # Asume que intrac tiene la función mostrar_ejercicio
+
+        import intexp  # Ejercicio de integrales de exponenciales
+        intexp.mostrar_ejercicio_integral_exp(nueva_ventana)# Asume que intexp tiene la función mostrar_ejercicio
+
 
 # Función para crear los botones de prácticas y notas
 def mostrar_botones_practica(nueva_ventana):
