@@ -33,9 +33,6 @@ def renderizar_latex_en_tkinter(expresion, ventana, fontsize=12):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-# Crear la ventana de Tkinter
-ventana = tk.Tk()
-ventana.title("Ejercicio de Integral de Función Exponencial")
 
 # Función para crear la ventana del ejercicio de integral
 def mostrar_ejercicio_integral_exp(ventana):
@@ -75,5 +72,8 @@ def mostrar_ejercicio_integral_exp(ventana):
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
+    # Crear la ventana de Tkinter
+    ventana = tk.Tk()
+    ventana.title("Ejercicio de Integral de Función Exponencial")
     mostrar_ejercicio_integral_exp(ventana)
 

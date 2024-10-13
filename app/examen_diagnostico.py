@@ -6,100 +6,107 @@ import os
 import platform
 
 # Importar los módulos personalizados
-import grafpol
 import cursodif
+import grafpol
 import derac
 import derexp
+
 import cursoint
 import intrac
 import intexp
 
-
 # Función para abrir archivos PDF
 def abrir_pdf(ruta_pdf):
-    if platform.system() == "Windows":
-        os.startfile(ruta_pdf)  # Abre el archivo en Windows
-    elif platform.system() == "Darwin":  # macOS
-        subprocess.Popen(["open", ruta_pdf])
-    else:  # Linux
-        subprocess.Popen(["xdg-open", ruta_pdf])
+        if platform.system() == "Windows":
+                os.startfile(ruta_pdf)  # Abre el archivo en Windows
+        elif platform.system() == "Darwin":  # macOS
+                subprocess.Popen(["open", ruta_pdf])
+        else:  # Linux
+                subprocess.Popen(["xdg-open", ruta_pdf])
 
-ejercicios_fallidos=[]
+ejercicios_fallidos = []
+
 # Función para practicar cálculo diferencial
 def practicar_diferencial(ejercicios_fallidos):
-        nueva_ventana=tk.Toplevel()
+        nueva_ventana = tk.Toplevel()
         realizar_ejercicio_diferencial(nueva_ventana)
 
 # Función para practicar cálculo integral
 def practicar_integral(ejercicios_fallidos):
-        nueva_ventana=tk.Toplevel()
+        nueva_ventana = tk.Toplevel()
         realizar_ejercicio_integral(nueva_ventana)
 
-
+# Función para realizar los ejercicios de cálculo diferencial
 # Función para realizar los ejercicios de cálculo diferencial
 def realizar_ejercicio_diferencial(nueva_ventana):
         ejercicios = [
-                grafpol.mostrar_ejercicio_grafica,
-                cursodif.crear_ejercicio,
-                derac.mostrar_ejercicio_derivada_sqrt,
-                derexp.mostrar_ejercicio_derivada_exp
+                (lambda wn: grafpol.mostrar_ejercicio_grafica(wn)),
+                (lambda wn: cursodif.crear_ejercicio(wn)),
+                (lambda wn: cursodif.crear_ejercicio(wn)),
+                (lambda wn: derac.mostrar_ejercicio_derivada_sqrt(wn)),
+                (lambda wn: derexp.mostrar_ejercicio_derivada_exp(wn))
         ]
 
-        current_index = [0]  # Usamos una lista para mantener el índice mutable
+        index = 0  # Índice del ejercicio actual
 
-        def mostrar_ejercicio(indice):
-                # Crea una nueva ventana para el ejercicio actual
-                ejercicio_ventana = tk.Toplevel()
-                ejercicios[indice](ejercicio_ventana)  # Muestra el ejercicio actual
+        # Función para manejar el cierre de la ventana
+        def on_close():
+                nueva_ventana.destroy()
 
-                # Botones de navegación
-                if indice > 0:  # Si no es el primer ejercicio
-                        btn_anterior = tk.Button(ejercicio_ventana, text="Anterior",
-                                        command=lambda: mostrar_ejercicio(indice - 1))
-                        btn_anterior.pack(side=tk.LEFT, padx=10)
+        nueva_ventana.protocol("WM_DELETE_WINDOW", on_close)
 
-                if indice < len(ejercicios) - 1:  # Si no es el último ejercicio
-                        btn_siguiente = tk.Button(ejercicio_ventana, text="Siguiente",
-                                        command=lambda: mostrar_ejercicio(indice + 1))
-                        btn_siguiente.pack(side=tk.RIGHT, padx=10)
+        def mostrar_ejercicio(index):
+        # Limpiar la ventana antes de mostrar el siguiente ejercicio
+                for widget in nueva_ventana.winfo_children():
+                        widget.destroy()
 
-                if indice == len(ejercicios) - 1:  # Si es el último ejercicio
-                        tk.Label(ejercicio_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
+                if index >= len(ejercicios):
+                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
+                        # Opción para reiniciar o cerrar la ventana
+                        tk.Button(nueva_ventana, text="Cerrar", command=nueva_ventana.destroy).pack(pady=10)
+                        return
 
-        # Comenzar con el primer ejercicio
-        mostrar_ejercicio(current_index[0])
+                # Mostrar el ejercicio actual
+                ejercicios[index](nueva_ventana)
 
+                # Botón para el siguiente ejercicio
+                if index < len(ejercicios) - 1:
+                        tk.Button(nueva_ventana, text="Siguiente ejercicio",
+                                command=lambda: mostrar_ejercicio(index + 1)).pack(pady=10)
+
+                # Botón opcional para regresar al ejercicio anterior
+                if index > 0:
+                        tk.Button(nueva_ventana, text="Ejercicio anterior",
+                                command=lambda: mostrar_ejercicio(index - 1)).pack(pady=10)
+
+        # Mostrar el primer ejercicio al iniciar
+        mostrar_ejercicio(index)
 
 
 # Función para realizar los ejercicios de cálculo integral
 def realizar_ejercicio_integral(nueva_ventana):
         ejercicios = [
-                grafpol.mostrar_ejercicio_grafica,
-                cursoint.mostrar_ejercicio,
-                intrac.mostrar_ejercicio_integral_sqrt,
-                intexp.mostrar_ejercicio_integral_exp
+                (lambda wn: grafpol.mostrar_ejercicio_grafica(wn)),
+                (lambda wn: cursoint.mostrar_ejercicio(wn)),
+                (lambda wn: cursoint.mostrar_ejercicio(wn)),
+                (lambda wn: intrac.mostrar_ejercicio_integral_sqrt(wn)),
+                (lambda wn: intexp.mostrar_ejercicio_integral_exp(wn))
         ]
 
-        current_index = [0]  # Usamos una lista para mantener el índice mutable
+        current_index = [0]  # Usamos una lista para que sea mutable
 
-        def mostrar_ejercicio(indice):
-                # Crea una nueva ventana para el ejercicio actual
-                ejercicio_ventana = tk.Toplevel()
-                ejercicios[indice](ejercicio_ventana)  # Muestra el ejercicio actual
+        def mostrar_ejercicio(index):
+                # Creamos una nueva ventana solo si es necesario
+                if index >= len(ejercicios):
+                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo integral!").pack(pady=10)
+                        return
 
-                # Botones de navegación
-                if indice > 0:  # Si no es el primer ejercicio
-                        btn_anterior = tk.Button(ejercicio_ventana, text="Anterior",
-                                        command=lambda: mostrar_ejercicio(indice - 1))
-                        btn_anterior.pack(side=tk.LEFT, padx=10)
-
-                if indice < len(ejercicios) - 1:  # Si no es el último ejercicio
-                        btn_siguiente = tk.Button(ejercicio_ventana, text="Siguiente",
-                                        command=lambda: mostrar_ejercicio(indice + 1))
-                        btn_siguiente.pack(side=tk.RIGHT, padx=10)
-
-                if indice == len(ejercicios) - 1:  # Si es el último ejercicio
-                        tk.Label(ejercicio_ventana, text="¡Has completado todos los ejercicios de cálculo integral!").pack(pady=10)
+                # Llamamos al ejercicio actual
+                ejercicios[index](nueva_ventana)
+                if index < len(ejercicios) - 1:
+                        siguiente_btn = tk.Button(nueva_ventana, text="Siguiente ejercicio",
+                                                  command=lambda: mostrar_ejercicio(index + 1))
+                        siguiente_btn.pack(pady=10)
 
         # Comenzar con el primer ejercicio
         mostrar_ejercicio(current_index[0])

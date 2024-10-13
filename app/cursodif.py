@@ -42,13 +42,13 @@ def verificar_respuesta(seleccion, correcta, ventana):
     else:
         resultado = f"Incorrecto. La respuesta correcta era: {correcta}"
 
+
     # Mostrar el resultado
     resultado_label = tk.Label(ventana, text=resultado, font=("Arial", 14))
     resultado_label.pack(pady=10)
-
 # Crear la ventana principal
-ventana = tk.Toplevel()
-ventana.title("Ejercicio de Derivadas")
+#ventana = tk.Toplevel()
+#ventana.title("Ejercicio de Derivadas")
 
 # Función para crear la interfaz del ejercicio
 def crear_ejercicio(ventana):
@@ -73,10 +73,13 @@ def crear_ejercicio(ventana):
     # Botón para verificar la respuesta
     verificar_btn = tk.Button(ventana, text="Verificar respuesta", command=lambda: verificar_respuesta(seleccion.get(), correcta, ventana))
     verificar_btn.pack(pady=10)
-
+    ventana.destroy()
     # Iniciar el loop de la ventana
     ventana.mainloop()
 
 # Probar la función
 if __name__ == "__main__":
+    #crear la ventana principal
+    ventana = tk.Toplevel()
+    ventana.title("Ejercicio de Derivadas")
     crear_ejercicio(ventana)

@@ -33,9 +33,6 @@ def renderizar_latex_en_tkinter(expresion, ventana, fontsize=12):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-# Crear la ventana de Tkinter
-ventana = tk.Tk()
-ventana.title("Ejercicio de Derivada de Función Exponencial")
 
 # Función para crear la ventana del ejercicio de derivada
 def mostrar_ejercicio_derivada_exp(ventana):
@@ -78,4 +75,7 @@ def mostrar_ejercicio_derivada_exp(ventana):
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
+    # Crear la ventana de Tkinter
+    ventana = tk.Tk()
+    ventana.title("Ejercicio de Derivada de Función Exponencial")
     mostrar_ejercicio_derivada_exp(ventana)

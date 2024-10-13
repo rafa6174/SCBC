@@ -44,9 +44,7 @@ def graficar_polinomio(polinomio, ventana):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
- # Crear una ventana de Tkinter
-ventana = tk.Tk()
-ventana.title("Ejercicio de Gráficas de Polinomios")
+
 
 # Función para crear la ventana del ejercicio
 def mostrar_ejercicio_grafica(ventana):
@@ -85,4 +83,7 @@ def mostrar_ejercicio_grafica(ventana):
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
+    # Crear una ventana de Tkinter
+    ventana = tk.Tk()
+    ventana.title("Ejercicio de Gráficas de Polinomios")
     mostrar_ejercicio_grafica(ventana)

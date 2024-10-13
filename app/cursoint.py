@@ -32,9 +32,7 @@ def renderizar_latex_en_tkinter(expresion, ventana, fontsize=12):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-# Crear una ventana
-ventana = tk.Tk()
-ventana.title("Ejercicio de Cálculo Integral")
+
 
 # Función para crear la ventana del ejercicio
 def mostrar_ejercicio(ventana):
@@ -78,4 +76,7 @@ def mostrar_ejercicio(ventana):
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
+    # Crear una ventana
+    ventana = tk.Tk()
+    ventana.title("Ejercicio de Cálculo Integral")
     mostrar_ejercicio(ventana)
