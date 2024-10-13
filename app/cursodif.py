@@ -46,15 +46,16 @@ def verificar_respuesta(seleccion, correcta, ventana):
     resultado_label = tk.Label(ventana, text=resultado, font=("Arial", 14))
     resultado_label.pack(pady=10)
 
+# Crear la ventana principal
+ventana = tk.Toplevel()
+ventana.title("Ejercicio de Derivadas")
+
 # Función para crear la interfaz del ejercicio
-def crear_ejercicio():
+def crear_ejercicio(ventana):
     # Generar un polinomio aleatorio usando la función del archivo funciones.py
     polinomio = generar_polinomio(3, 10)  # Polinomio de grado máximo 3 y coeficientes entre -10 y 10
     opciones, correcta = generar_opciones(polinomio)
 
-    # Crear la ventana principal
-    ventana = tk.Toplevel()
-    ventana.title("Ejercicio de Derivadas")
 
     # Mostrar el polinomio en formato LaTeX
     texx = tk.Label(ventana, text="Seleccione la derivada de:",font=("Arial",14))
@@ -73,9 +74,9 @@ def crear_ejercicio():
     verificar_btn = tk.Button(ventana, text="Verificar respuesta", command=lambda: verificar_respuesta(seleccion.get(), correcta, ventana))
     verificar_btn.pack(pady=10)
 
+    # Iniciar el loop de la ventana
+    ventana.mainloop()
+
 # Probar la función
 if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Sistema Tutorial Inteligente - Ejercicio de Derivadas")
-    tk.Button(root, text="Generar Ejercicio", command=crear_ejercicio).pack(pady=20)
-    root.mainloop()
+    crear_ejercicio(ventana)

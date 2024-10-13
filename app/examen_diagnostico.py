@@ -1,6 +1,51 @@
 from experta import *
 import tkinter as tk
 from tkinter import ttk
+import tkinter as tk
+from tkinter import ttk
+import subprocess
+
+# Función para abrir archivos PDF
+def abrir_pdf(ruta_pdf):
+    subprocess.Popen(['xdg-open', ruta_pdf])
+
+# Función para practicar cálculo diferencial
+def practicar_diferencial():
+    ejercicios_fallidos = []
+    realizar_ejercicio_diferencial(ejercicios_fallidos)
+
+# Función para practicar cálculo integral
+def practicar_integral():
+    ejercicios_fallidos = []
+    realizar_ejercicio_integral(ejercicios_fallidos)
+
+# Función para realizar los ejercicios de cálculo diferencial
+def realizar_ejercicio_diferencial(ejercicios_fallidos):
+    # Aquí deberías agregar lógica para mostrar ejercicios de gráficas, polinomios, raíces y exponenciales
+    # y verificar si la respuesta fue correcta o no. Los incorrectos deben guardarse en 'ejercicios_fallidos'
+    pass
+
+# Función para realizar los ejercicios de cálculo integral
+def realizar_ejercicio_integral(ejercicios_fallidos):
+    # Similar a la función para diferencial, pero con ejercicios de integrales
+    pass
+
+# Función para crear los botones de prácticas y notas
+def mostrar_botones_practica(nueva_ventana):
+    # Botón para practicar cálculo diferencial
+    tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=practicar_diferencial).pack(pady=10)
+
+    # Botón para practicar cálculo integral
+    tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=practicar_integral).pack(pady=10)
+
+    # Botón para ver notas de cálculo diferencial
+    tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
+              command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
+
+    # Botón para ver notas de cálculo integral
+    tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
+              command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
+
 
 # Función para crear el formulario con las preguntas
 def abrir_nuevo_formulario():

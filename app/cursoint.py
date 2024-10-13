@@ -35,13 +35,14 @@ def mostrar_latex_en_tkinter(expr, ventana, pos_y=0):
 
     return canvas
 
+# Crear una ventana
+ventana = tk.Tk()
+ventana.title("Ejercicio de Cálculo Integral")
+
 # Función para crear la ventana del ejercicio
-def mostrar_ejercicio():
+def mostrar_ejercicio(ventana):
     polinomio, integral_correcta, opciones = generar_ejercicio_integral()
 
-    # Crear una ventana
-    ventana = tk.Tk()
-    ventana.title("Ejercicio de Cálculo Integral")
 
     # Mostrar el polinomio a integrar como LaTeX
     pregunta_label = tk.Label(ventana, text="¿Cuál es la integral de?", font=("Arial", 14))
@@ -80,4 +81,4 @@ def mostrar_ejercicio():
 
 # Ejecutar el ejercicio
 if __name__ == "__main__":
-    mostrar_ejercicio()
+    mostrar_ejercicio(ventana)
