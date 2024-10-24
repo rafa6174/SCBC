@@ -75,8 +75,8 @@ def mostrar_ejercicio_grafica(ventana):
     btn_verificar.pack(pady=20)
 
     # Botón para pasar al siguiente ejercicio
-    btn_siguiente = tk.Button(ventana, text="Siguiente", command=lambda: [ventana.destroy()], font=("Arial", 12))
-    btn_siguiente.pack(pady=20)
+    #btn_siguiente = tk.Button(ventana, text="Siguiente", command=lambda: [ventana.destroy()], font=("Arial", 12))
+    #btn_siguiente.pack(pady=20)
 
     # Iniciar el loop de la ventana
     #ventana.mainloop()

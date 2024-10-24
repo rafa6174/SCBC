@@ -25,7 +25,61 @@ def abrir_pdf(ruta_pdf):
         else:  # Linux
                 subprocess.Popen(["xdg-open", ruta_pdf])
 
-ejercicios_fallidos = []
+# Función que destruye los widgets actuales y carga el nuevo ejercicio
+def practica(opcion, ventana_ejercicio):
+        match opcion:
+                case 1:
+                        for widget in ventana_ejercicio.winfo_children():
+                                widget.destroy()
+                        grafpol.mostrar_ejercicio_grafica(ventana_ejercicio)
+                case 2:
+                        for widget in ventana_ejercicio.winfo_children():
+                                widget.destroy()
+                        cursodif.crear_ejercicio(ventana_ejercicio)
+                case 3:
+                        for widget in ventana_ejercicio.winfo_children():
+                                widget.destroy()
+                        derac.mostrar_ejercicio_derivada_sqrt(ventana_ejercicio)
+                case 4:
+                        for widget in ventana_ejercicio.winfo_children():
+                                widget.destroy()
+                        derexp.mostrar_ejercicio_derivada_exp(ventana_ejercicio)
+                case 5:
+                        for widget in ventana_ejercicio.winfo_children():
+                                widget.destroy()
+                        cursoint.mostrar_ejercicio(ventana_ejercicio)
+                case 6:
+                        for widget in ventana_ejercicio.winfo_children():
+                                widget.destroy()
+                        intrac.mostrar_ejercicio_integral_sqrt(ventana_ejercicio)
+                case 7:
+                        for widget in ventana_ejercicio.winfo_children():
+                                widget.destroy()
+                        intexp.mostrar_ejercicio_integral_exp(ventana_ejercicio)
+                case _:
+                        print("Opción no válida")
+
+# Función para cargar los ejercicios de gráficos de polinomios
+def graficas_polinomios(eje):
+        print(f"Ejecutando graficas_polinomios con eje={eje}")
+        ventana_ejercicio = tk.Toplevel()
+        practica(eje, ventana_ejercicio)
+
+        # Frame para botones
+        boton_frame = tk.Frame(ventana_ejercicio)
+        boton_frame.pack(pady=20)
+
+        # Botón siguiente o finalizar según el número de ejercicios
+        if eje < 7:
+                tk.Button(boton_frame, text="Siguiente", font=("Arial", 12), command=lambda: siguiente_grafica(eje, ventana_ejercicio)).pack(side=tk.RIGHT, padx=10)
+        else:
+                tk.Button(boton_frame, text="Finalizar", font=("Arial", 12), command=finalizar_formulario).pack(side=tk.RIGHT, padx=10)
+
+# Función que maneja la navegación al siguiente ejercicio
+def siguiente_grafica(eje, ventana_ejercicio):
+        eje = eje + 1
+        ventana_ejercicio.destroy()  # Cierra la ventana actual antes de cargar el siguiente ejercicio
+        graficas_polinomios(eje)
 
 # Función para practicar cálculo diferencial
 def graficaderivada(ejercicios_fallidos):
@@ -365,9 +419,10 @@ def abrir_nuevo_formulario():
 
                                 label = tk.Label(nueva_ventana, text="Página del curso de Cálculo Diferencial", font=("Arial", 16))
                                 label.pack(pady=20)
-                                
+
                                 # Botón para practicar cálculo diferencial
-                                tk.Button(nueva_ventana, text="Ejecicio derivada grafica", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejecicio derivada grafica", font=("Arial", 12),
+                                          command=lambda: pruebas.graficas_polinomios(1)).pack(pady=10)
 
                                 tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=None).pack(pady=10)
 
@@ -378,7 +433,7 @@ def abrir_nuevo_formulario():
                                 command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
 
                                 tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
-    
+
                         # Función para la página del curso de Cálculo Integral
                         def pagina_integral(self):
                                 nueva_ventana = tk.Toplevel(self.root)  # Crear una nueva ventana
