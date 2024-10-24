@@ -4,6 +4,7 @@ from experta import *
 import subprocess
 import os
 import platform
+from tkinter import messagebox
 
 # Importar los módulos personalizados
 import cursodif
@@ -27,23 +28,107 @@ def abrir_pdf(ruta_pdf):
 ejercicios_fallidos = []
 
 # Función para practicar cálculo diferencial
-def practicar_diferencial(ejercicios_fallidos):
+def graficaderivada(ejercicios_fallidos):
         nueva_ventana = tk.Toplevel()
-        realizar_ejercicio_diferencial(nueva_ventana)
+        grafica_derivada(nueva_ventana)
 
 # Función para practicar cálculo integral
-def practicar_integral(ejercicios_fallidos):
+def poliderivada(ejercicios_fallidos):
         nueva_ventana = tk.Toplevel()
-        realizar_ejercicio_integral(nueva_ventana)
-
+        poli_derivada(nueva_ventana)
+def expderivada(ejercicios_fallidos):
+        nueva_ventana = tk.Toplevel()
+        exp_derivada(nueva_ventana)
 # Función para realizar los ejercicios de cálculo diferencial
 # Función para realizar los ejercicios de cálculo diferencial
-def realizar_ejercicio_diferencial(nueva_ventana):
+def grafica_derivada(nueva_ventana):
         ejercicios = [
                 (lambda wn: grafpol.mostrar_ejercicio_grafica(wn)),
                 (lambda wn: cursodif.crear_ejercicio(wn)),
                 (lambda wn: cursodif.crear_ejercicio(wn)),
                 (lambda wn: derac.mostrar_ejercicio_derivada_sqrt(wn)),
+                (lambda wn: derexp.mostrar_ejercicio_derivada_exp(wn))
+        ]
+
+        index = 0  # Índice del ejercicio actual
+
+        # Función para manejar el cierre de la ventana
+        def on_close():
+                nueva_ventana.destroy()
+
+        nueva_ventana.protocol("WM_DELETE_WINDOW", on_close)
+
+        def mostrar_ejercicio(index):
+        # Limpiar la ventana antes de mostrar el siguiente ejercicio
+                for widget in nueva_ventana.winfo_children():
+                        widget.destroy()
+
+                if index >= len(ejercicios):
+                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
+                        # Opción para reiniciar o cerrar la ventana
+                        tk.Button(nueva_ventana, text="Cerrar", command=nueva_ventana.destroy).pack(pady=10)
+                        return
+
+                # Mostrar el ejercicio actual
+                ejercicios[index](nueva_ventana)
+
+                # Botón para el siguiente ejercicio
+                if index < len(ejercicios) - 1:
+                        tk.Button(nueva_ventana, text="Siguiente ejercicio",
+                                command=lambda: mostrar_ejercicio(index + 1)).pack(pady=10)
+
+                # Botón opcional para regresar al ejercicio anterior
+                if index > 0:
+                        tk.Button(nueva_ventana, text="Ejercicio anterior",
+                                command=lambda: mostrar_ejercicio(index - 1)).pack(pady=10)
+
+        # Mostrar el primer ejercicio al iniciar
+        mostrar_ejercicio(index)
+def poli_derivada(nueva_ventana):
+        ejercicios = [
+                (lambda wn: cursodif.crear_ejercicio(wn)),
+                (lambda wn: cursodif.crear_ejercicio(wn)),
+                (lambda wn: derac.mostrar_ejercicio_derivada_sqrt(wn)),
+                (lambda wn: derexp.mostrar_ejercicio_derivada_exp(wn))
+        ]
+
+        index = 0  # Índice del ejercicio actual
+
+        # Función para manejar el cierre de la ventana
+        def on_close():
+                nueva_ventana.destroy()
+
+        nueva_ventana.protocol("WM_DELETE_WINDOW", on_close)
+
+        def mostrar_ejercicio(index):
+        # Limpiar la ventana antes de mostrar el siguiente ejercicio
+                for widget in nueva_ventana.winfo_children():
+                        widget.destroy()
+
+                if index >= len(ejercicios):
+                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
+                        # Opción para reiniciar o cerrar la ventana
+                        tk.Button(nueva_ventana, text="Cerrar", command=nueva_ventana.destroy).pack(pady=10)
+                        return
+
+                # Mostrar el ejercicio actual
+                ejercicios[index](nueva_ventana)
+
+                # Botón para el siguiente ejercicio
+                if index < len(ejercicios) - 1:
+                        tk.Button(nueva_ventana, text="Siguiente ejercicio",
+                                command=lambda: mostrar_ejercicio(index + 1)).pack(pady=10)
+
+                # Botón opcional para regresar al ejercicio anterior
+                if index > 0:
+                        tk.Button(nueva_ventana, text="Ejercicio anterior",
+                                command=lambda: mostrar_ejercicio(index - 1)).pack(pady=10)
+
+        # Mostrar el primer ejercicio al iniciar
+        mostrar_ejercicio(index)
+
+def exp_derivada(nueva_ventana):
+        ejercicios = [
                 (lambda wn: derexp.mostrar_ejercicio_derivada_exp(wn))
         ]
 
@@ -113,25 +198,11 @@ def realizar_ejercicio_integral(nueva_ventana):
 
 
 
-# Función para crear los botones de prácticas y notas
-def mostrar_botones_practica(nueva_ventana):
-        # Botón para practicar cálculo diferencial
-        tk.Button(nueva_ventana, text="Practicar Cálculo Diferencial", font=("Arial", 12), command=lambda: practicar_diferencial(ejercicios_fallidos)).pack(pady=10)
-
-        tk.Button(nueva_ventana, text="Practicar Cálculo Integral", font=("Arial", 12), command=lambda: practicar_integral(ejercicios_fallidos)).pack(pady=10)
-
-        # Botón para ver notas de cálculo diferencial
-        tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
-                command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
-
-        # Botón para ver notas de cálculo integral
-        tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
-                command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
-
 # Función para crear el formulario con las preguntas
 def abrir_nuevo_formulario():
         nueva_ventana = tk.Toplevel()
         nueva_ventana.title("Examen diagnóstico")
+        nueva_ventana.attributes('-fullscreen', True)
 
         # Lista de preguntas y opciones por página
         preguntas = [
@@ -255,66 +326,145 @@ def abrir_nuevo_formulario():
 
                 # A partir de aquí se mostrarán los resultados
                 tk.Label(nueva_ventana, text="Resultados del examen diagnóstico", font=("Arial", 16, "bold")).pack(pady=10)
-                tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/{preguntas_dif}", font=("Arial", 14)).pack(pady=10)
-                tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/{preguntas_int}", font=("Arial", 14)).pack(pady=10)
-                tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/{total_preguntas}", font=("Arial", 14)).pack(pady=10)
-                tk.Label(nueva_ventana, text="Resultados del curso a tomar", font=("Arial", 16, "bold")).pack(pady=10)
-
+                tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/10", font=("Arial", 14)).pack(pady=10)
+                tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/5", font=("Arial", 14)).pack(pady=10)
+                tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/15", font=("Arial", 14)).pack(pady=10)
+                #poner aquí un botón de siguiente
+                
 
                 # Sistema experto que determina el curso que se debe tomar
-                puntajedif = puntaje_dif / preguntas_dif
-                puntajeint = puntaje_int / preguntas_int
-                puntajetotal = puntaje_total / total_preguntas
+                p_dif = puntaje_dif / 10
+                p_int = puntaje_int / 5
+                p_total = puntaje_total / 15
 
-                class ExamenDiagnostico(Fact):
+
+                # Definir los hechos del sistema
+                class Puntajes(Fact):
+                        """Información sobre los puntajes obtenidos en un examen diagnóstico."""
                         pass
 
-                class SistemaExperto1(KnowledgeEngine):
-                        @Rule(ExamenDiagnostico(puntaje1=P(lambda x: x < 0.5)))
-                        def necesita_curso(self):
-                                tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo.", font=("Arial", 14, "italic")).pack(pady=10)
+                # Definir el motor de inferencia
+                class DiagnosticoCursillo(KnowledgeEngine):
 
-                        @Rule(ExamenDiagnostico(puntaje1=P(lambda x: x >= 0.5)))
-                        def no_necesita_curso(self):
-                                tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo.", font=("Arial", 14, "italic")).pack(pady=10)
+                        
+                        # Constructor que recibe la ventana principal
+                        def __init__(self, root):
+                                super().__init__()
+                                self.root = root  # Guardar la referencia a la ventana principal
 
-                class SistemaExperto2(KnowledgeEngine):
-                        @Rule(ExamenDiagnostico(puntaje2=P(lambda x: x < 0.5)))
-                        def necesita_curso(self):
-                                tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo diferencial.", font=("Arial", 14, "italic")).pack(pady=10)
+                        # Función para mostrar una nueva "página" en el mismo proyecto
+                        def mostrar_pagina(self, mensaje, pagina_func):
+                                if messagebox.askokcancel("Recomendación", mensaje):
+                                    pagina_func()
 
-                        @Rule(ExamenDiagnostico(puntaje2=P(lambda x: x >= 0.5)))
-                        def no_necesita_curso(self):
-                                tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo diferencial.", font=("Arial", 14, "italic")).pack(pady=10)
+                        # Función para la página del curso de Cálculo Diferencial
+                        def pagina_diferencial(self):
+                                nueva_ventana = tk.Toplevel(self.root)  # Crear una nueva ventana
+                                nueva_ventana.title("Curso de Cálculo Diferencial")
+                                nueva_ventana.attributes('-fullscreen', True)
 
-                class SistemaExperto3(KnowledgeEngine):
-                        @Rule(ExamenDiagnostico(puntaje3=P(lambda x: x < 0.5)))
-                        def necesita_curso(self):
-                                tk.Label(nueva_ventana, text="Debe tomar el curso de cálculo integral.", font=("Arial", 14, "italic")).pack(pady=10)
+                                label = tk.Label(nueva_ventana, text="Página del curso de Cálculo Diferencial", font=("Arial", 16))
+                                label.pack(pady=20)
+                                
+                                # Botón para practicar cálculo diferencial
+                                tk.Button(nueva_ventana, text="Ejecicio derivada grafica", font=("Arial", 12), command=None).pack(pady=10)
 
-                        @Rule(ExamenDiagnostico(puntaje3=P(lambda x: x >= 0.5)))
-                        def no_necesita_curso(self):
-                                tk.Label(nueva_ventana, text="No necesita tomar el curso de cálculo integral.", font=("Arial", 14, "italic")).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=None).pack(pady=10)
 
-                # Para sistema experto 1
-                engine = SistemaExperto1()
+                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+
+                                # Botón para ver notas de cálculo diferencial
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
+                                command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+    
+                        # Función para la página del curso de Cálculo Integral
+                        def pagina_integral(self):
+                                nueva_ventana = tk.Toplevel(self.root)  # Crear una nueva ventana
+                                nueva_ventana.title("Curso de Cálculo Integral")
+                                nueva_ventana.attributes('-fullscreen', True)
+
+                                label = tk.Label(nueva_ventana, text="Página del curso de Cálculo Integral", font=("Arial", 16))
+                                label.pack(pady=20)
+
+                                # Botón para practicar cálculo integral
+                                tk.Button(nueva_ventana, text="Ejecicio integral grafica", font=("Arial", 12), command=None).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio integral polinomio", font=("Arial", 12), command=None).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio integral Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+
+                                # Botón para ver notas de cálculo integral
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
+                                command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+
+                        # Función para la página del curso de Cálculo
+                        def pagina_calculos(self):
+                                nueva_ventana = tk.Toplevel(self.root)  # Crear una nueva ventana
+                                nueva_ventana.title("Curso de Cálculo")
+                                nueva_ventana.attributes('-fullscreen', True)
+
+                                label = tk.Label(nueva_ventana, text="Página del curso de Cálculo", font=("Arial", 16))
+                                label.pack(pady=20)
+                                
+                                # Botón para practicar cálculo diferencial
+                                tk.Button(nueva_ventana, text="Ejecicio derivada grafica", font=("Arial", 12), command=None).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=None).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+
+                                # Botón para ver notas de cálculo diferencial
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
+                                command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
+
+                                # Botón para practicar cálculo integral
+                                tk.Button(nueva_ventana, text="Ejecicio integral grafica", font=("Arial", 12), command=None).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio integral polinomio", font=("Arial", 12), command=None).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio integral Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+
+                                # Botón para ver notas de cálculo integral
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
+                                command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+                                
+                                                      
+                                             
+                        @Rule(Puntajes(puntajedif=P(lambda x: x < 0.5), puntajeint=P(lambda x: x < 0.5)))
+                        def recomendar_ambos(self):
+                                mensaje = "Se recomienda tomar el curso de Cálculo."
+                                self.mostrar_pagina(mensaje, self.pagina_calculos)
+
+                                
+                        @Rule(Puntajes(puntajedif=P(lambda x: x >= 0.5), puntajeint=P(lambda x: x < 0.5)))
+                        def recomendar_integral(self):
+                                mensaje = "Se recomienda tomar el curso de Cálculo Integral."
+                                self.mostrar_pagina(mensaje, self.pagina_integral)
+    
+                        @Rule(Puntajes(puntajedif=P(lambda x: x < 0.5), puntajeint=P(lambda x: x >= 0.5)))
+                        def recomendar_diferencial(self):
+                                mensaje = "Se recomienda tomar el curso de Cálculo Diferencial."
+                                self.mostrar_pagina(mensaje, self.pagina_diferencial)
+    
+                        @Rule(Puntajes(puntajedif=P(lambda x: x >= 0.7), puntajeint=P(lambda x: x >= 0.7), puntajetotal=P(lambda x: x >= 0.85)))
+                        def no_recomendar(self):
+                                messagebox.showinfo("No es necesario tomar ningún curso.")
+    
+                # Inicializar el motor de inferencia
+                engine = DiagnosticoCursillo(root)
+
+                # Declarar los puntajes obtenidos en un examen diagnóstico
                 engine.reset()
-                engine.declare(ExamenDiagnostico(puntaje1=puntajetotal))
+                engine.declare(Puntajes(puntajedif=p_dif, puntajeint=p_int, puntajetotal=p_total))
                 engine.run()
 
-                # Para sistema experto 2
-                engine = SistemaExperto2()
-                engine.reset()
-                engine.declare(ExamenDiagnostico(puntaje2=puntajedif))
-                engine.run()
 
-                # Para sistema experto 3
-                engine = SistemaExperto3()
-                engine.reset()
-                engine.declare(ExamenDiagnostico(puntaje3=puntajeint))
-                engine.run()
-
-                mostrar_botones_practica(nueva_ventana)
                 # Botón para cerrar
                 tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
 
@@ -323,6 +473,6 @@ def abrir_nuevo_formulario():
 
 # Si deseas probar el formulario directamente desde este archivo, puedes descomentar lo siguiente:
 if __name__ == "__main__":
-        root = tk.Tk()
+        root = tk.Tk()            
         abrir_nuevo_formulario()
         root.mainloop()
