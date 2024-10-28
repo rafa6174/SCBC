@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image, ImageTk  # Necesario para manejar imágenes en tkinter
 from tkinter import messagebox
 import sqlite3
 import examen_diagnostico
@@ -112,13 +113,45 @@ def abrir_formulario_registro():
 # Crear la ventana principal
 root = tk.Tk()
 root.title("Portada")
+root.geometry("800x500")
+
+# Cargar el GIF animado
+gif_path = "fondo.gif"  # Reemplaza con el nombre de tu GIF
+gif = Image.open(gif_path)
+
+# Lista para guardar los fotogramas
+frames = []
+try:
+    while True:
+        frame = ImageTk.PhotoImage(gif.copy())
+        frames.append(frame)
+        gif.seek(len(frames))  # Ir al siguiente fotograma
+except EOFError:
+    pass  # Esto sucede cuando llegamos al último fotograma del GIF
+
+# Crear un Label para mostrar el GIF como fondo
+label_fondo = tk.Label(root)
+label_fondo.place(x=0, y=0, relwidth=1, relheight=1)  # El Label ocupa toda la ventana
+
+# Función para actualizar los fotogramas del GIF
+def actualizar_fondo(frame_index):
+    frame = frames[frame_index]
+    label_fondo.config(image=frame)
+    frame_index += 1
+    if frame_index == len(frames):
+        frame_index = 0
+    root.after(100, actualizar_fondo, frame_index)  # Actualizar el fotograma cada 100 ms
+
+# Iniciar la animación
+actualizar_fondo(0)
+
 
 # Crear etiquetas con el texto deseado
-label1 = tk.Label(root, text="Universidad Autónoma de Hidalgo", font=("Arial", 16, "bold"))
-label2 = tk.Label(root, text="Tutorial Inteligente de Cálculo Diferencial", font=("Arial", 14))
-label3 = tk.Label(root, text="Sistemas Basados en Conocimiento", font=("Arial", 14))
-label4 = tk.Label(root, text="Profesora: Martha Idalid Rivera González", font=("Arial", 12, "italic"))
-label5 = tk.Label(root, text="Alumnos: Rafael Nieves Álvarez, Loren Clavel Nolasco Hernández", font=("Arial", 12))
+label1 = tk.Label(root, text="Universidad Autónoma del Estado de Hidalgo", font=("Arial", 16, "bold"), bg="white")
+label2 = tk.Label(root, text="Tutorial Inteligente de Cálculo Diferencial", font=("Arial", 14), bg="white")
+label3 = tk.Label(root, text="Sistemas Basados en Conocimiento", font=("Arial", 14), bg="white")
+label4 = tk.Label(root, text="Profesora: Martha Idalid Rivera González", font=("Arial", 12, "italic"), bg="white")
+label5 = tk.Label(root, text="Alumnos: Rafael Nieves Álvarez, Loren Clavel Nolasco Hernández", font=("Arial", 12), bg="white")
 
 # Empaquetar las etiquetas en la ventana
 label1.pack(pady=10)
@@ -128,16 +161,16 @@ label4.pack(pady=10)
 label5.pack(pady=5)
 
 # Crear una etiqueta para el Login
-login_label = tk.Label(root, text="Login", font=("Arial", 14, "bold"))
+login_label = tk.Label(root, text="Login", font=("Arial", 14, "bold"), bg="white")
 login_label.pack(pady=20)
 
 # Crear etiquetas y campos de entrada para usuario y contraseña
-user_label = tk.Label(root, text="Usuario:", font=("Arial", 12))
+user_label = tk.Label(root, text="Usuario:", font=("Arial", 12), bg="white")
 user_label.pack()
 user_entry = tk.Entry(root, font=("Arial", 12))
 user_entry.pack(pady=5)
 
-password_label = tk.Label(root, text="Contraseña:", font=("Arial", 12))
+password_label = tk.Label(root, text="Contraseña:", font=("Arial", 12), bg="white")
 password_label.pack()
 password_entry = tk.Entry(root, font=("Arial", 12), show="*")
 password_entry.pack(pady=5)
