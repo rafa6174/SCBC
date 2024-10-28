@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image, ImageTk  # Necesario para manejar imágenes en tkinter
 from tkinter import ttk
 from experta import *
 import subprocess
@@ -250,13 +251,21 @@ def realizar_ejercicio_integral(nueva_ventana):
         # Comenzar con el primer ejercicio
         mostrar_ejercicio(current_index[0])
 
-
-
 # Función para crear el formulario con las preguntas
 def abrir_nuevo_formulario():
         nueva_ventana = tk.Toplevel()
         nueva_ventana.title("Examen diagnóstico")
-        nueva_ventana.attributes('-fullscreen', True)
+        nueva_ventana.geometry("800x650")
+
+        # Cargar la imagen de fondo
+        fondo_img = Image.open("ptofondo.png")
+        fondo_img = fondo_img.resize((800, 650), Image.LANCZOS)  # Ajusta el tamaño de la imagen
+        fondo_photo = ImageTk.PhotoImage(fondo_img)
+
+        # Crear un Label con la imagen de fondo
+        fondo_label = tk.Label(nueva_ventana, image=fondo_photo)
+        fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
+        fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         # Lista de preguntas y opciones por página
         preguntas = [
@@ -316,6 +325,17 @@ def abrir_nuevo_formulario():
                 # Limpiar el contenido actual de la ventana
                 for widget in nueva_ventana.winfo_children():
                         widget.destroy()
+                nueva_ventana.geometry("800x650")
+
+                # Cargar la imagen de fondo
+                fondo_img = Image.open("ptofondo.png")
+                fondo_img = fondo_img.resize((800, 650), Image.LANCZOS)  # Ajusta el tamaño de la imagen
+                fondo_photo = ImageTk.PhotoImage(fondo_img)
+
+                # Crear un Label con la imagen de fondo
+                fondo_label = tk.Label(nueva_ventana, image=fondo_photo)
+                fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
+                fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
 
                 # Mostrar las preguntas de la página correspondiente
                 for i, (pregunta, opciones) in enumerate(preguntas[pagina]):
@@ -346,14 +366,25 @@ def abrir_nuevo_formulario():
 
         # Función para cambiar la página
         def cambiar_pagina(nueva_pagina):
-
                 mostrar_pagina(nueva_pagina)
+                                              
 
         # Función para finalizar el formulario, calcular el puntaje y mostrar las respuestas
         def finalizar_formulario():
                 # Limpiar la ventana
                 for widget in nueva_ventana.winfo_children():
                         widget.destroy()
+                nueva_ventana.geometry("800x650")
+
+                # Cargar la imagen de fondo
+                fondo_img = Image.open("ptofondoo.png")
+                fondo_img = fondo_img.resize((800, 650), Image.LANCZOS)  # Ajusta el tamaño de la imagen
+                fondo_photo = ImageTk.PhotoImage(fondo_img)
+
+                # Crear un Label con la imagen de fondo
+                fondo_label = tk.Label(nueva_ventana, image=fondo_photo)
+                fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
+                fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
 
                 # Calcular el puntaje
                 puntaje_dif = 0
@@ -415,9 +446,18 @@ def abrir_nuevo_formulario():
                         def pagina_diferencial(self):
                                 nueva_ventana = tk.Toplevel(self.root)  # Crear una nueva ventana
                                 nueva_ventana.title("Curso de Cálculo Diferencial")
-                                nueva_ventana.attributes('-fullscreen', True)
+                                nueva_ventana.geometry("800x650")
+                                # Cargar la imagen de fondo
+                                fondo_img = Image.open("pt0fondo.png")
+                                fondo_img = fondo_img.resize((800, 650), Image.LANCZOS)  # Ajusta el tamaño de la imagen
+                                fondo_photo = ImageTk.PhotoImage(fondo_img)
 
-                                label = tk.Label(nueva_ventana, text="Página del curso de Cálculo Diferencial", font=("Arial", 16))
+                                # Crear un Label con la imagen de fondo
+                                fondo_label = tk.Label(nueva_ventana, image=fondo_photo)
+                                fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
+                                fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+                                label = tk.Label(nueva_ventana, text="Curso de Cálculo Diferencial", font=("Arial", 16))
                                 label.pack(pady=20)
 
                                 # Botón para practicar cálculo diferencial
@@ -438,9 +478,18 @@ def abrir_nuevo_formulario():
                         def pagina_integral(self):
                                 nueva_ventana = tk.Toplevel(self.root)  # Crear una nueva ventana
                                 nueva_ventana.title("Curso de Cálculo Integral")
-                                nueva_ventana.attributes('-fullscreen', True)
+                                nueva_ventana.geometry("800x650")
+                                # Cargar la imagen de fondo
+                                fondo_img = Image.open("pt0fondo1.png")
+                                fondo_img = fondo_img.resize((800, 650), Image.LANCZOS)  # Ajusta el tamaño de la imagen
+                                fondo_photo = ImageTk.PhotoImage(fondo_img)
 
-                                label = tk.Label(nueva_ventana, text="Página del curso de Cálculo Integral", font=("Arial", 16))
+                                # Crear un Label con la imagen de fondo
+                                fondo_label = tk.Label(nueva_ventana, image=fondo_photo)
+                                fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
+                                fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+                                label = tk.Label(nueva_ventana, text="Curso de Cálculo Integral", font=("Arial", 16))
                                 label.pack(pady=20)
 
                                 # Botón para practicar cálculo integral
@@ -460,9 +509,13 @@ def abrir_nuevo_formulario():
                         def pagina_calculos(self):
                                 nueva_ventana = tk.Toplevel(self.root)  # Crear una nueva ventana
                                 nueva_ventana.title("Curso de Cálculo")
-                                nueva_ventana.attributes('-fullscreen', True)
+                                nueva_ventana.geometry("800x650")
+                                # Cargar la imagen de fondo
+                                fondo_img = Image.open("pt0fondo2.png")
+                                fondo_img = fondo_img.resize((800, 650), Image.LANCZOS)  # Ajusta el tamaño de la imagen
+                                fondo_photo = ImageTk.PhotoImage(fondo_img)
 
-                                label = tk.Label(nueva_ventana, text="Página del curso de Cálculo", font=("Arial", 16))
+                                label = tk.Label(nueva_ventana, text="Curso de Cálculo", font=("Arial", 16))
                                 label.pack(pady=20)
                                 
                                 # Botón para practicar cálculo diferencial
