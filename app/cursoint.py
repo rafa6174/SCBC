@@ -5,8 +5,14 @@ import random
 from funciones import generar_polinomio  # Importamos la función de generar polinomios
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
+import sys
 
 x = sp.Symbol('x')
+
+def cerrar_ventana_y_salir():
+    ventana.destroy()  # Cierra la ventana
+    sys.exit()  # Sale del programa
+
 
 # Función para generar la integral y las opciones
 def generar_ejercicio_integral():
@@ -71,6 +77,14 @@ def mostrar_ejercicio(ventana):
     btn_verificar = tk.Button(ventana, text="Verificar respuesta", command=verificar_respuesta, font=("Arial", 12))
     btn_verificar.pack(pady=20)
 
+    btn_salir = tk.Button(ventana, text="Salir", command=cerrar_ventana_y_salir, font=("Arial", 12))
+    btn_salir.pack(pady=20)
+
+    btn_salir = tk.Button(ventana, text="Siguiente", command=ventana.destroy, font=("Arial", 12))
+    btn_salir.pack(pady=20)
+
+
+
     # Iniciar el loop de la ventana
     ventana.mainloop()
 
@@ -80,3 +94,4 @@ if __name__ == "__main__":
     ventana = tk.Tk()
     ventana.title("Ejercicio de Cálculo Integral")
     mostrar_ejercicio(ventana)
+    ventana.destroy()

@@ -6,7 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from funciones import generar_polinomio
-
 x = sp.Symbol('x')
 
 # Función para generar un ejercicio con un polinomio aleatorio y opciones incorrectas
@@ -44,12 +43,9 @@ def graficar_polinomio(polinomio, ventana):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-
-
 # Función para crear la ventana del ejercicio
 def mostrar_ejercicio_grafica(ventana):
     polinomio_correcto, opciones = generar_ejercicio_grafica()
-
 
     # Mostrar la gráfica del polinomio correcto sin revelar la fórmula
     label_instruccion = tk.Label(ventana, text="¿A cuál de los siguientes polinomios pertenece la gráfica?", font=("Arial", 14))
@@ -78,8 +74,12 @@ def mostrar_ejercicio_grafica(ventana):
     btn_verificar = tk.Button(ventana, text="Verificar respuesta", command=verificar_respuesta, font=("Arial", 12))
     btn_verificar.pack(pady=20)
 
+    # Botón para pasar al siguiente ejercicio
+    #btn_siguiente = tk.Button(ventana, text="Siguiente", command=lambda: [ventana.destroy()], font=("Arial", 12))
+    #btn_siguiente.pack(pady=20)
+
     # Iniciar el loop de la ventana
-    ventana.mainloop()
+    #ventana.mainloop()
 
 
 
@@ -89,3 +89,5 @@ if __name__ == "__main__":
     ventana = tk.Tk()
     ventana.title("Ejercicio de Gráficas de Polinomios")
     mostrar_ejercicio_grafica(ventana)
+    ventana.mainloop()
+

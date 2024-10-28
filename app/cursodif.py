@@ -73,9 +73,12 @@ def crear_ejercicio(ventana):
     # Botón para verificar la respuesta
     verificar_btn = tk.Button(ventana, text="Verificar respuesta", command=lambda: verificar_respuesta(seleccion.get(), correcta, ventana))
     verificar_btn.pack(pady=10)
-    ventana.destroy()
+
+    btn_salir = tk.Button(ventana, text="Siguiente", command=ventana.destroy, font=("Arial", 12))
+    btn_salir.pack(pady=20)
+
     # Iniciar el loop de la ventana
-    ventana.mainloop()
+    #ventana.mainloop()
 
 # Probar la función
 if __name__ == "__main__":
