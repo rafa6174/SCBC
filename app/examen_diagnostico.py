@@ -82,174 +82,7 @@ def siguiente_grafica(eje, ventana_ejercicio):
         ventana_ejercicio.destroy()  # Cierra la ventana actual antes de cargar el siguiente ejercicio
         graficas_polinomios(eje)
 
-# Función para practicar cálculo diferencial
-def graficaderivada(ejercicios_fallidos):
-        nueva_ventana = tk.Toplevel()
-        grafica_derivada(nueva_ventana)
 
-# Función para practicar cálculo integral
-def poliderivada(ejercicios_fallidos):
-        nueva_ventana = tk.Toplevel()
-        poli_derivada(nueva_ventana)
-def expderivada(ejercicios_fallidos):
-        nueva_ventana = tk.Toplevel()
-        exp_derivada(nueva_ventana)
-# Función para realizar los ejercicios de cálculo diferencial
-# Función para realizar los ejercicios de cálculo diferencial
-def grafica_derivada(nueva_ventana):
-        ejercicios = [
-                (lambda wn: grafpol.mostrar_ejercicio_grafica(wn)),
-                (lambda wn: cursodif.crear_ejercicio(wn)),
-                (lambda wn: cursodif.crear_ejercicio(wn)),
-                (lambda wn: derac.mostrar_ejercicio_derivada_sqrt(wn)),
-                (lambda wn: derexp.mostrar_ejercicio_derivada_exp(wn))
-        ]
-
-        index = 0  # Índice del ejercicio actual
-
-        # Función para manejar el cierre de la ventana
-        def on_close():
-                nueva_ventana.destroy()
-
-        nueva_ventana.protocol("WM_DELETE_WINDOW", on_close)
-
-        def mostrar_ejercicio(index):
-        # Limpiar la ventana antes de mostrar el siguiente ejercicio
-                for widget in nueva_ventana.winfo_children():
-                        widget.destroy()
-
-                if index >= len(ejercicios):
-                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
-                        # Opción para reiniciar o cerrar la ventana
-                        tk.Button(nueva_ventana, text="Cerrar", command=nueva_ventana.destroy).pack(pady=10)
-                        return
-
-                # Mostrar el ejercicio actual
-                ejercicios[index](nueva_ventana)
-
-                # Botón para el siguiente ejercicio
-                if index < len(ejercicios) - 1:
-                        tk.Button(nueva_ventana, text="Siguiente ejercicio",
-                                command=lambda: mostrar_ejercicio(index + 1)).pack(pady=10)
-
-                # Botón opcional para regresar al ejercicio anterior
-                if index > 0:
-                        tk.Button(nueva_ventana, text="Ejercicio anterior",
-                                command=lambda: mostrar_ejercicio(index - 1)).pack(pady=10)
-
-        # Mostrar el primer ejercicio al iniciar
-        mostrar_ejercicio(index)
-def poli_derivada(nueva_ventana):
-        ejercicios = [
-                (lambda wn: cursodif.crear_ejercicio(wn)),
-                (lambda wn: cursodif.crear_ejercicio(wn)),
-                (lambda wn: derac.mostrar_ejercicio_derivada_sqrt(wn)),
-                (lambda wn: derexp.mostrar_ejercicio_derivada_exp(wn))
-        ]
-
-        index = 0  # Índice del ejercicio actual
-
-        # Función para manejar el cierre de la ventana
-        def on_close():
-                nueva_ventana.destroy()
-
-        nueva_ventana.protocol("WM_DELETE_WINDOW", on_close)
-
-        def mostrar_ejercicio(index):
-        # Limpiar la ventana antes de mostrar el siguiente ejercicio
-                for widget in nueva_ventana.winfo_children():
-                        widget.destroy()
-
-                if index >= len(ejercicios):
-                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
-                        # Opción para reiniciar o cerrar la ventana
-                        tk.Button(nueva_ventana, text="Cerrar", command=nueva_ventana.destroy).pack(pady=10)
-                        return
-
-                # Mostrar el ejercicio actual
-                ejercicios[index](nueva_ventana)
-
-                # Botón para el siguiente ejercicio
-                if index < len(ejercicios) - 1:
-                        tk.Button(nueva_ventana, text="Siguiente ejercicio",
-                                command=lambda: mostrar_ejercicio(index + 1)).pack(pady=10)
-
-                # Botón opcional para regresar al ejercicio anterior
-                if index > 0:
-                        tk.Button(nueva_ventana, text="Ejercicio anterior",
-                                command=lambda: mostrar_ejercicio(index - 1)).pack(pady=10)
-
-        # Mostrar el primer ejercicio al iniciar
-        mostrar_ejercicio(index)
-
-def exp_derivada(nueva_ventana):
-        ejercicios = [
-                (lambda wn: derexp.mostrar_ejercicio_derivada_exp(wn))
-        ]
-
-        index = 0  # Índice del ejercicio actual
-
-        # Función para manejar el cierre de la ventana
-        def on_close():
-                nueva_ventana.destroy()
-
-        nueva_ventana.protocol("WM_DELETE_WINDOW", on_close)
-
-        def mostrar_ejercicio(index):
-        # Limpiar la ventana antes de mostrar el siguiente ejercicio
-                for widget in nueva_ventana.winfo_children():
-                        widget.destroy()
-
-                if index >= len(ejercicios):
-                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo diferencial!").pack(pady=10)
-                        # Opción para reiniciar o cerrar la ventana
-                        tk.Button(nueva_ventana, text="Cerrar", command=nueva_ventana.destroy).pack(pady=10)
-                        return
-
-                # Mostrar el ejercicio actual
-                ejercicios[index](nueva_ventana)
-
-                # Botón para el siguiente ejercicio
-                if index < len(ejercicios) - 1:
-                        tk.Button(nueva_ventana, text="Siguiente ejercicio",
-                                command=lambda: mostrar_ejercicio(index + 1)).pack(pady=10)
-
-                # Botón opcional para regresar al ejercicio anterior
-                if index > 0:
-                        tk.Button(nueva_ventana, text="Ejercicio anterior",
-                                command=lambda: mostrar_ejercicio(index - 1)).pack(pady=10)
-
-        # Mostrar el primer ejercicio al iniciar
-        mostrar_ejercicio(index)
-
-
-# Función para realizar los ejercicios de cálculo integral
-def realizar_ejercicio_integral(nueva_ventana):
-        ejercicios = [
-                (lambda wn: grafpol.mostrar_ejercicio_grafica(wn)),
-                (lambda wn: cursoint.mostrar_ejercicio(wn)),
-                (lambda wn: cursoint.mostrar_ejercicio(wn)),
-                (lambda wn: intrac.mostrar_ejercicio_integral_sqrt(wn)),
-                (lambda wn: intexp.mostrar_ejercicio_integral_exp(wn))
-        ]
-
-        current_index = [0]  # Usamos una lista para que sea mutable
-
-        def mostrar_ejercicio(index):
-                # Creamos una nueva ventana solo si es necesario
-                if index >= len(ejercicios):
-                        tk.Label(nueva_ventana, text="¡Has completado todos los ejercicios de cálculo integral!").pack(pady=10)
-                        return
-
-                # Llamamos al ejercicio actual
-                ejercicios[index](nueva_ventana)
-                if index < len(ejercicios) - 1:
-                        siguiente_btn = tk.Button(nueva_ventana, text="Siguiente ejercicio",
-                                                  command=lambda: mostrar_ejercicio(index + 1))
-                        siguiente_btn.pack(pady=10)
-
-        # Comenzar con el primer ejercicio
-        mostrar_ejercicio(current_index[0])
 
 # Función para crear el formulario con las preguntas
 def abrir_nuevo_formulario():
@@ -460,13 +293,17 @@ def abrir_nuevo_formulario():
                                 label = tk.Label(nueva_ventana, text="Curso de Cálculo Diferencial", font=("Arial", 16))
                                 label.pack(pady=20)
 
+                                ventana_ejercicio=tk.Toplevel()
+
                                 # Botón para practicar cálculo diferencial
-                                tk.Button(nueva_ventana, text="Ejecicio derivada grafica", font=("Arial", 12),
-                                          command=lambda: pruebas.graficas_polinomios(1)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio derivada grafica", font=("Arial", 12),
+                                          command=lambda: practica(1,ventana_ejercicio)).pack(pady=10)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=lambda: practica(2,ventana_ejercicio)).pack(pady=10)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio derivada raiz", font=("Arial", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=lambda: practica(4,ventana_ejercicio)).pack(pady=10)
 
                                 # Botón para ver notas de cálculo diferencial
                                 tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
@@ -518,27 +355,35 @@ def abrir_nuevo_formulario():
                                 label = tk.Label(nueva_ventana, text="Curso de Cálculo", font=("Arial", 16))
                                 label.pack(pady=20)
                                 
+                                ventana_ejercicio=tk.Toplevel()
+
                                 # Botón para practicar cálculo diferencial
-                                tk.Button(nueva_ventana, text="Ejecicio derivada grafica", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio derivada grafica", font=("Arial", 12),
+                                          command=lambda: practica(1,ventana_ejercicio)).pack(pady=10)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=lambda: practica(2,ventana_ejercicio)).pack(pady=10)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio derivada raiz", font=("Arial", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=lambda: practica(4,ventana_ejercicio)).pack(pady=10)
 
                                 # Botón para ver notas de cálculo diferencial
                                 tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
                                 command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
 
-                                # Botón para practicar cálculo integral
-                                tk.Button(nueva_ventana, text="Ejecicio integral grafica", font=("Arial", 12), command=None).pack(pady=10)
+                                 # Botón para practicar cálculo integral
+                                tk.Button(nueva_ventana, text="Ejecicio integral grafica", font=("Arial", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=10)
 
-                                tk.Button(nueva_ventana, text="Ejercicio integral polinomio", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio integral polinomio", font=("Arial", 12), command=lambda: practica(5,ventana_ejercicio)).pack(pady=10)
 
-                                tk.Button(nueva_ventana, text="Ejercicio integral Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ejercicio integral raíz", font=("Arial", 12), command=lambda: practica(6,ventana_ejercicio)).pack(pady=10)
+
+                                tk.Button(nueva_ventana, text="Ejercicio integral Exponencial", font=("Arial", 12), command=lambda: practica(7,ventana_ejercicio)).pack(pady=10)
 
                                 # Botón para ver notas de cálculo integral
                                 tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
                                 command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
+
 
                                 tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
                                 

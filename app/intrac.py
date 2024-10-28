@@ -4,6 +4,7 @@ import sympy as sp
 import random
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import examen_diagnostico
 
 x = sp.Symbol('x')
 
@@ -69,7 +70,7 @@ def mostrar_ejercicio_integral_sqrt(ventana):
     btn_verificar = tk.Button(ventana, text="Verificar respuesta", command=verificar_respuesta, font=("Arial", 12))
     btn_verificar.pack(pady=20)
 
-    btn_salir = tk.Button(ventana, text="Siguiente", command=ventana.destroy, font=("Arial", 12))
+    btn_salir = tk.Button(ventana, text="Siguiente", command=lambda: examen_diagnostico.practica(6,ventana), font=("Arial", 12))
     btn_salir.pack(pady=20)
 
 

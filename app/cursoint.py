@@ -6,6 +6,7 @@ from funciones import generar_polinomio  # Importamos la función de generar pol
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import sys
+import examen_diagnostico
 
 x = sp.Symbol('x')
 
@@ -77,10 +78,8 @@ def mostrar_ejercicio(ventana):
     btn_verificar = tk.Button(ventana, text="Verificar respuesta", command=verificar_respuesta, font=("Arial", 12))
     btn_verificar.pack(pady=20)
 
-    btn_salir = tk.Button(ventana, text="Salir", command=cerrar_ventana_y_salir, font=("Arial", 12))
-    btn_salir.pack(pady=20)
 
-    btn_salir = tk.Button(ventana, text="Siguiente", command=ventana.destroy, font=("Arial", 12))
+    btn_salir = tk.Button(ventana, text="Siguiente", command=lambda: examen_diagnostico.practica(5,ventana), font=("Arial", 12))
     btn_salir.pack(pady=20)
 
 

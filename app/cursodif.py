@@ -4,6 +4,7 @@ import sympy as sp
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from funciones import generar_polinomio  # Importar la función desde funciones.py
+import examen_diagnostico
 
 # Definir la variable simbólica 'x'
 x = sp.Symbol('x')
@@ -74,7 +75,7 @@ def crear_ejercicio(ventana):
     verificar_btn = tk.Button(ventana, text="Verificar respuesta", command=lambda: verificar_respuesta(seleccion.get(), correcta, ventana))
     verificar_btn.pack(pady=10)
 
-    btn_salir = tk.Button(ventana, text="Siguiente", command=ventana.destroy, font=("Arial", 12))
+    btn_salir = tk.Button(ventana, text="Siguiente", command=lambda: examen_diagnostico.practica(2,ventana), font=("Arial", 12))
     btn_salir.pack(pady=20)
 
     # Iniciar el loop de la ventana
