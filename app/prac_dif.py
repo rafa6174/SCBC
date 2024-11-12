@@ -277,10 +277,10 @@ def mostrar_ejercicio_derivada_exp(ventana):
 
     # Botón para enviar la respuesta
     btn_verificar = tk.Button(ventana, text="Verificar respuesta", command=verificar_respuesta, font=("Arial", 12))
-    btn_verificar.pack(pady=20)
+    btn_verificar.pack(pady=10)
 
     btn_salir = tk.Button(ventana, text="Siguiente", command=ventana.destroy, font=("Arial", 12))
-    btn_salir.pack(pady=20)
+    btn_salir.pack(pady=10)
 
 
 

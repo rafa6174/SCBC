@@ -66,10 +66,10 @@ def mostrar_ejercicio_integral_exp(ventana):
 
     # Botón para enviar la respuesta
     btn_verificar = tk.Button(ventana, text="Verificar respuesta", command=verificar_respuesta, font=("Arial", 12))
-    btn_verificar.pack(pady=20)
+    btn_verificar.pack(pady=10)
 
     btn_salir = tk.Button(ventana, text="Siguiente", command=lambda: examen_diagnostico.practica(7,ventana), font=("Arial", 12))
-    btn_salir.pack(pady=20)
+    btn_salir.pack(pady=10)
 
 
     # Iniciar el loop de la ventana

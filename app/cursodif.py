@@ -27,8 +27,8 @@ def generar_opciones(polinomio):
 # Función para mostrar el polinomio y opciones en formato LaTeX usando matplotlib
 def mostrar_latex_lienzo(ventana, expresion, pos_y):
     # Crear una figura para matplotlib
-    fig, ax = plt.subplots(figsize=(5, 1))  # Tamaño pequeño
-    ax.text(0.5, 0.5, f"${sp.latex(expresion)}$", fontsize=14, ha='center', va='center')
+    fig, ax = plt.subplots(figsize=(3, 0.5))  # Tamaño pequeño
+    ax.text(0.5, 0.5, f"${sp.latex(expresion)}$", fontsize=12, ha='center', va='center')
     ax.axis('off')  # Ocultar ejes
 
     # Integrar la figura en la ventana Tkinter
@@ -72,11 +72,11 @@ def crear_ejercicio(ventana):
         tk.Radiobutton(ventana, text="Seleccionar", variable=seleccion, value=str(opcion), font=("Arial", 12)).pack(anchor=tk.W)
 
     # Botón para verificar la respuesta
-    verificar_btn = tk.Button(ventana, text="Verificar respuesta", command=lambda: verificar_respuesta(seleccion.get(), correcta, ventana))
+    verificar_btn = tk.Button(ventana, text="Verificar respuesta", command=lambda: verificar_respuesta(seleccion.get(),correcta, ventana),  font=("Arial", 12))
     verificar_btn.pack(pady=10)
 
     btn_salir = tk.Button(ventana, text="Siguiente", command=lambda: examen_diagnostico.practica(2,ventana), font=("Arial", 12))
-    btn_salir.pack(pady=20)
+    btn_salir.pack(pady=10)
 
     # Iniciar el loop de la ventana
     #ventana.mainloop()

@@ -243,11 +243,10 @@ def abrir_nuevo_formulario():
                 puntaje_total = puntaje_int + puntaje_dif  # Sumamos puntaje_dif y puntaje_int para obtener el total
 
                 # A partir de aquí se mostrarán los resultados
-                tk.Label(nueva_ventana, text="Resultados del examen diagnóstico", font=("Arial", 16, "bold")).pack(pady=10)
-                tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/10", font=("Arial", 14)).pack(pady=10)
-                tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/5", font=("Arial", 14)).pack(pady=10)
-                tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/15", font=("Arial", 14)).pack(pady=10)
-                #poner aquí un botón de siguiente
+                tk.Label(nueva_ventana, text="Resultados del examen diagnóstico", font=("Impact", 22)).pack(pady=10)
+                tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/10", font=("Verdana", 14)).pack(pady=10)
+                tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/5", font=("Verdana", 14)).pack(pady=10)
+                tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/15", font=("Verdana", 14)).pack(pady=10)
                 
 
                 # Sistema experto que determina el curso que se debe tomar
@@ -290,26 +289,25 @@ def abrir_nuevo_formulario():
                                 fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
                                 fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-                                label = tk.Label(nueva_ventana, text="Curso de Cálculo Diferencial", font=("Arial", 16))
+                                label = tk.Label(nueva_ventana, text="Curso de Cálculo Diferencial", font=("Impact", 22))
                                 label.pack(pady=20)
 
                                 ventana_ejercicio=tk.Toplevel()
 
-                                # Botón para practicar cálculo diferencial
-                                tk.Button(nueva_ventana, text="Ejercicio derivada grafica", font=("Arial", 12),
-                                          command=lambda: practica(1,ventana_ejercicio)).pack(pady=10)
+                                # Botones de ejercicios
+                                tk.Button(nueva_ventana, text="Derivada de una gráfica", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=lambda: practica(2,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Derivada de un polinomio", font=("Verdana", 12), command=lambda: practica(2,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada raiz", font=("Arial", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Derivada de un radical", font=("Verdana", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=lambda: practica(4,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Derivada de una exponencial", font=("Verdana", 12), command=lambda: practica(4,ventana_ejercicio)).pack(pady=5)
 
                                 # Botón para ver notas de cálculo diferencial
-                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
-                                command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Verdana", 12),command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+                                # Botón para cerrar la ventana 
+                                tk.Button(nueva_ventana, text="Cerrar", font=("Verdana", 12, "bold"), command=nueva_ventana.destroy).pack(pady=10)
 
                         # Función para la página del curso de Cálculo Integral
                         def pagina_integral(self):
@@ -326,21 +324,25 @@ def abrir_nuevo_formulario():
                                 fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
                                 fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-                                label = tk.Label(nueva_ventana, text="Curso de Cálculo Integral", font=("Arial", 16))
+                                label = tk.Label(nueva_ventana, text="Curso de Cálculo Integral", font=("Impact", 22))
                                 label.pack(pady=20)
 
-                                # Botón para practicar cálculo integral
-                                tk.Button(nueva_ventana, text="Ejecicio integral grafica", font=("Arial", 12), command=None).pack(pady=10)
+                                ventana_ejercicio=tk.Toplevel()
+                                
+                                #  Botenes de ejercicios
+                                tk.Button(nueva_ventana, text="Integral de una gráfica", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio integral polinomio", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Integral de un polinomio", font=("Verdana", 12), command=lambda: practica(5,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio integral Exponencial", font=("Arial", 12), command=None).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Integral de un radical", font=("Verdana", 12), command=lambda: practica(6,ventana_ejercicio)).pack(pady=5)
+
+                                tk.Button(nueva_ventana, text="Integral de una exponencial", font=("Verdana", 12), command=lambda: practica(7,ventana_ejercicio)).pack(pady=5)
 
                                 # Botón para ver notas de cálculo integral
-                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
-                                command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Verdana", 12), command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+                                # Botón para cerrar la ventana
+                                tk.Button(nueva_ventana, text="Cerrar", font=("Verdana", 12, "bold"), command=nueva_ventana.destroy).pack(pady=10)
 
                         # Función para la página del curso de Cálculo
                         def pagina_calculos(self):
@@ -352,40 +354,48 @@ def abrir_nuevo_formulario():
                                 fondo_img = fondo_img.resize((800, 650), Image.LANCZOS)  # Ajusta el tamaño de la imagen
                                 fondo_photo = ImageTk.PhotoImage(fondo_img)
 
-                                label = tk.Label(nueva_ventana, text="Curso de Cálculo", font=("Arial", 16))
-                                label.pack(pady=20)
-                                
+                                # Crear un Label con la imagen de fondo
+                                fondo_label = tk.Label(nueva_ventana, image=fondo_photo)
+                                fondo_label.image = fondo_photo  # Necesario para evitar que la imagen sea recolectada por el GC
+                                fondo_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+                                label = tk.Label(nueva_ventana, text="Curso de Cálculo", font=("Impact", 22))
+                                label.pack(pady=10)
+
+                                label = tk.Label(nueva_ventana, text="Ejercicios de Cálculo Diferencial", font=("Verdana", 15))
+                                label.pack(pady=10)
+
                                 ventana_ejercicio=tk.Toplevel()
 
                                 # Botón para practicar cálculo diferencial
-                                tk.Button(nueva_ventana, text="Ejercicio derivada grafica", font=("Arial", 12),
-                                          command=lambda: practica(1,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Derivada de una gráfica", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada polinomio", font=("Arial", 12), command=lambda: practica(2,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Derivada de un polinomio", font=("Verdana", 12), command=lambda: practica(2,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada raiz", font=("Arial", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Derivada de un radical", font=("Verdana", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio derivada Exponencial", font=("Arial", 12), command=lambda: practica(4,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Derivada de una exponencial", font=("Verdana", 12), command=lambda: practica(4,ventana_ejercicio)).pack(pady=5)
 
                                 # Botón para ver notas de cálculo diferencial
-                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Arial", 12),
-                                command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Diferencial", font=("Verdana", 12),command=lambda: abrir_pdf("notas_diferencial_SBC.pdf")).pack(pady=5)
 
-                                 # Botón para practicar cálculo integral
-                                tk.Button(nueva_ventana, text="Ejecicio integral grafica", font=("Arial", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=10)
+                                label = tk.Label(nueva_ventana, text="Ejercicios de Cálculo Integral", font=("Verdana", 15))
+                                label.pack(pady=10)
 
-                                tk.Button(nueva_ventana, text="Ejercicio integral polinomio", font=("Arial", 12), command=lambda: practica(5,ventana_ejercicio)).pack(pady=10)
+                                # Botón para practicar cálculo integral
+                                tk.Button(nueva_ventana, text="Integral de una gráfica", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio integral raíz", font=("Arial", 12), command=lambda: practica(6,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Integral de un polinomio", font=("Verdana", 12), command=lambda: practica(5,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Ejercicio integral Exponencial", font=("Arial", 12), command=lambda: practica(7,ventana_ejercicio)).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Integral de un radical", font=("Verdana", 12), command=lambda: practica(6,ventana_ejercicio)).pack(pady=5)
+
+                                tk.Button(nueva_ventana, text="Integral de una exponencial", font=("Verdana", 12), command=lambda: practica(7,ventana_ejercicio)).pack(pady=5)
 
                                 # Botón para ver notas de cálculo integral
-                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Arial", 12),
-                                command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=10)
+                                tk.Button(nueva_ventana, text="Ver Notas de Cálculo Integral", font=("Verdana", 12), command=lambda: abrir_pdf("notas_integral_SBC.pdf")).pack(pady=5)
 
 
-                                tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+                                tk.Button(nueva_ventana, text="Cerrar", font=("Verdana", 12, "bold"), command=nueva_ventana.destroy).pack(pady=10)
                                 
                                                       
                                              
@@ -407,10 +417,11 @@ def abrir_nuevo_formulario():
     
                         @Rule(Puntajes(puntajedif=P(lambda x: x >= 0.7), puntajeint=P(lambda x: x >= 0.7), puntajetotal=P(lambda x: x >= 0.85)))
                         def no_recomendar(self):
-                                messagebox.showinfo("No es necesario tomar ningún curso.")
+                                mensaje = "No es necesario tomar ningún curso."
+                                self.mostrar_pagina(mensaje, self.pagina_diferencial)
     
                 # Inicializar el motor de inferencia
-                engine = DiagnosticoCursillo(root)
+                engine = DiagnosticoCursillo(nueva_ventana)
 
                 # Declarar los puntajes obtenidos en un examen diagnóstico
                 engine.reset()
@@ -419,7 +430,7 @@ def abrir_nuevo_formulario():
 
 
                 # Botón para cerrar
-                tk.Button(nueva_ventana, text="Cerrar", font=("Arial", 12), command=nueva_ventana.destroy).pack(pady=20)
+                tk.Button(nueva_ventana, text="Cerrar", font=("Verdana", 12, "bold"), command=nueva_ventana.destroy).pack(pady=10)
 
         # Mostrar la primera página
         mostrar_pagina(pagina_actual)
