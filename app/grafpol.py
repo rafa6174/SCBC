@@ -73,11 +73,11 @@ def mostrar_ejercicio_grafica(ventana):
 
     # Botón para enviar la respuesta
     btn_verificar = tk.Button(ventana, text="Verificar respuesta", command=verificar_respuesta, font=("Arial", 12))
-    btn_verificar.pack(pady=20)
+    btn_verificar.pack(pady=10)
 
     # Botón para pasar al siguiente ejercicio
     btn_siguiente = tk.Button(ventana, text="Siguiente", command=lambda: examen_diagnostico.practica(1,ventana), font=("Arial", 12))
-    btn_siguiente.pack(pady=20)
+    btn_siguiente.pack(pady=10)
 
     # Iniciar el loop de la ventana
     #ventana.mainloop()
