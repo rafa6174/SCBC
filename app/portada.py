@@ -3,7 +3,7 @@ from PIL import Image, ImageTk  # Necesario para manejar imágenes en tkinter
 from tkinter import messagebox
 import sqlite3
 import examen_diagnostico
-
+from chatbot import mostrar_chatbot
 # Función para manejar el inicio de sesión
 def login():
     usuario = user_entry.get()  # Obtiene el texto del campo de usuario
@@ -150,7 +150,7 @@ actualizar_fondo(0)
 label1 = tk.Label(root, text="Universidad Autónoma del Estado de Hidalgo", font=("Arial", 16, "bold"), bg="white")
 label2 = tk.Label(root, text="Tutorial Inteligente de Cálculo Diferencial", font=("Arial", 14), bg="white")
 label3 = tk.Label(root, text="Sistemas Basados en Conocimiento", font=("Arial", 14), bg="white")
-label4 = tk.Label(root, text="Profesora: Martha Idalid Rivera González", font=("Arial", 12, "italic"), bg="white")
+label4 = tk.Label(root, text="Profesora: Dra. Martha Idalid Rivera González", font=("Arial", 14, "italic"), bg="white")
 label5 = tk.Label(root, text="Alumnos: Rafael Nieves Álvarez, Loren Clavel Nolasco Hernández", font=("Arial", 12), bg="white")
 
 # Empaquetar las etiquetas en la ventana
@@ -182,6 +182,8 @@ login_button.pack(pady=10)
 # Crear un botón para abrir el formulario de registro
 register_button = tk.Button(root, text="Registrar", font=("Arial", 12), command=abrir_formulario_registro)
 register_button.pack(pady=10)
+
+
 
 # Iniciar el loop principal
 root.mainloop()

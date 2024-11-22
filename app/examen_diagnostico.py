@@ -17,6 +17,8 @@ import cursoint
 import intrac
 import intexp
 
+from chatbot import mostrar_chatbot
+
 # Función para abrir archivos PDF
 def abrir_pdf(ruta_pdf):
         if platform.system() == "Windows":
@@ -247,6 +249,9 @@ def abrir_nuevo_formulario():
                 tk.Label(nueva_ventana, text=f"Puntaje diferencial: {puntaje_dif}/10", font=("Verdana", 14)).pack(pady=10)
                 tk.Label(nueva_ventana, text=f"Puntaje integral: {puntaje_int}/5", font=("Verdana", 14)).pack(pady=10)
                 tk.Label(nueva_ventana, text=f"Puntaje total: {puntaje_total}/15", font=("Verdana", 14)).pack(pady=10)
+
+                bot_button = tk.Button(nueva_ventana, text="Usar chatbot", font=("Arial", 12), command=mostrar_chatbot)
+                bot_button.pack(pady=10)
                 
 
                 # Sistema experto que determina el curso que se debe tomar
