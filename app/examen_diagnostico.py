@@ -300,11 +300,11 @@ def abrir_nuevo_formulario():
                                 ventana_ejercicio=tk.Toplevel()
 
                                 # Botones de ejercicios
-                                tk.Button(nueva_ventana, text="Derivada de una gráfica", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
+                                tk.Button(nueva_ventana, text="Gráfica de un polinomio", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
 
                                 tk.Button(nueva_ventana, text="Derivada de un polinomio", font=("Verdana", 12), command=lambda: practica(2,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Derivada de un radical", font=("Verdana", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=5)
+                                tk.Button(nueva_ventana, text="Derivada de una raíz", font=("Verdana", 12), command=lambda: practica(3,ventana_ejercicio)).pack(pady=5)
 
                                 tk.Button(nueva_ventana, text="Derivada de una exponencial", font=("Verdana", 12), command=lambda: practica(4,ventana_ejercicio)).pack(pady=5)
 
@@ -335,11 +335,11 @@ def abrir_nuevo_formulario():
                                 ventana_ejercicio=tk.Toplevel()
                                 
                                 #  Botenes de ejercicios
-                                tk.Button(nueva_ventana, text="Integral de una gráfica", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
+                                tk.Button(nueva_ventana, text="Gráfica de un polinomio", font=("Verdana", 12), command=lambda: practica(1,ventana_ejercicio)).pack(pady=5)
 
                                 tk.Button(nueva_ventana, text="Integral de un polinomio", font=("Verdana", 12), command=lambda: practica(5,ventana_ejercicio)).pack(pady=5)
 
-                                tk.Button(nueva_ventana, text="Integral de un radical", font=("Verdana", 12), command=lambda: practica(6,ventana_ejercicio)).pack(pady=5)
+                                tk.Button(nueva_ventana, text="Integral de una raíz", font=("Verdana", 12), command=lambda: practica(6,ventana_ejercicio)).pack(pady=5)
 
                                 tk.Button(nueva_ventana, text="Integral de una exponencial", font=("Verdana", 12), command=lambda: practica(7,ventana_ejercicio)).pack(pady=5)
 
